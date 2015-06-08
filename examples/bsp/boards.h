@@ -32,6 +32,10 @@
   #include "pca10031.h"
 #elif defined(BOARD_WT51822)
   #include "wt51822.h"
+#elif defined(BOARD_NANO_C)
+  #include "nano_central.h"
+#elif defined(BOARD_NANO_P)
+  #include "nano_periph.h"
 #elif defined(BOARD_CUSTOM)
   #include "custom_board.h"
 #else
