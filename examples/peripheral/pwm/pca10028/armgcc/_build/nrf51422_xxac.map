@@ -1,0 +1,776 @@
+Archive member included because of file (symbol)
+
+/usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-exit.o)
+                              /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/crt0.o (exit)
+/usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-impure.o)
+                              /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-exit.o) (_global_impure_ptr)
+/usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-init.o)
+                              /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/crt0.o (__libc_init_array)
+/usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-memset.o)
+                              /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/crt0.o (memset)
+/usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libnosys.a(_exit.o)
+                              /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-exit.o) (_exit)
+/usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/libgcc.a(_udivsi3.o)
+                              _build/app_pwm.o (__aeabi_uidiv)
+/usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/libgcc.a(_dvmd_tls.o)
+                              /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/libgcc.a(_udivsi3.o) (__aeabi_idiv0)
+
+Allocating common symbols
+Common symbol       size              file
+
+m_pwm_ready_counter
+                    0x2               _build/app_pwm.o
+m_pwm_PWM1_cb       0x24              _build/main.o
+
+Discarded input sections
+
+ .text          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crti.o
+ .data          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crti.o
+ .bss           0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crti.o
+ .text          0x00000000       0x60 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtbegin.o
+ .data          0x00000000        0x4 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtbegin.o
+ .bss           0x00000000       0x1c /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtbegin.o
+ .init_array    0x00000000        0x4 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtbegin.o
+ .fini_array    0x00000000        0x4 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtbegin.o
+ .eh_frame      0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtbegin.o
+ .jcr           0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtbegin.o
+ .ARM.attributes
+                0x00000000       0x2c /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtbegin.o
+ .data          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/crt0.o
+ .bss           0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/crt0.o
+ .ARM.extab     0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/crt0.o
+ .text          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-exit.o)
+ .data          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-exit.o)
+ .bss           0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-exit.o)
+ .text          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-impure.o)
+ .data          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-impure.o)
+ .bss           0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-impure.o)
+ .data._impure_ptr
+                0x00000000        0x4 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-impure.o)
+ .text          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-init.o)
+ .data          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-init.o)
+ .bss           0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-init.o)
+ .text          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-memset.o)
+ .data          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-memset.o)
+ .bss           0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-memset.o)
+ .text          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libnosys.a(_exit.o)
+ .data          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libnosys.a(_exit.o)
+ .bss           0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libnosys.a(_exit.o)
+ .text          0x00000000        0x0 _build/app_button.o
+ .data          0x00000000        0x0 _build/app_button.o
+ .bss           0x00000000        0x0 _build/app_button.o
+ .text.detection_delay_timeout_handler
+                0x00000000       0xa4 _build/app_button.o
+ .text.gpiote_event_handler
+                0x00000000       0x5c _build/app_button.o
+ .text.app_button_init
+                0x00000000       0xac _build/app_button.o
+ .text.app_button_enable
+                0x00000000       0x30 _build/app_button.o
+ .text.app_button_disable
+                0x00000000       0x38 _build/app_button.o
+ .text.app_button_is_pushed
+                0x00000000       0x2c _build/app_button.o
+ .bss.m_detection_delay
+                0x00000000        0x4 _build/app_button.o
+ .bss.mp_buttons
+                0x00000000        0x4 _build/app_button.o
+ .bss.m_button_count
+                0x00000000        0x1 _build/app_button.o
+ .bss.m_pin_state
+                0x00000000        0x4 _build/app_button.o
+ .bss.m_detection_delay_timer_id
+                0x00000000        0x4 _build/app_button.o
+ .bss.m_pin_transition
+                0x00000000        0x4 _build/app_button.o
+ .comment       0x00000000       0x71 _build/app_button.o
+ .ARM.attributes
+                0x00000000       0x31 _build/app_button.o
+ .text          0x00000000        0x0 _build/app_error.o
+ .data          0x00000000        0x0 _build/app_error.o
+ .bss           0x00000000        0x0 _build/app_error.o
+ .text          0x00000000        0x0 _build/app_pwm.o
+ .data          0x00000000        0x0 _build/app_pwm.o
+ .bss           0x00000000        0x0 _build/app_pwm.o
+ .text.app_pwm_channel_duty_get
+                0x00000000       0x24 _build/app_pwm.o
+ .text.app_pwm_disable
+                0x00000000       0x1c _build/app_pwm.o
+ .text.app_pwm_uninit
+                0x00000000       0xfc _build/app_pwm.o
+ .text          0x00000000        0x0 _build/app_timer.o
+ .data          0x00000000        0x0 _build/app_timer.o
+ .bss           0x00000000        0x0 _build/app_timer.o
+ .text.app_timer_init
+                0x00000000      0x124 _build/app_timer.o
+ .text.app_timer_create
+                0x00000000       0x68 _build/app_timer.o
+ .text.app_timer_start
+                0x00000000      0x11c _build/app_timer.o
+ .text.app_timer_stop
+                0x00000000       0xe8 _build/app_timer.o
+ .text.app_timer_stop_all
+                0x00000000       0xc8 _build/app_timer.o
+ .text.app_timer_cnt_get
+                0x00000000       0x14 _build/app_timer.o
+ .text.app_timer_cnt_diff_compute
+                0x00000000        0xc _build/app_timer.o
+ .bss.m_node_array_size
+                0x00000000        0x1 _build/app_timer.o
+ .text          0x00000000        0x0 _build/app_util_platform.o
+ .data          0x00000000        0x0 _build/app_util_platform.o
+ .bss           0x00000000        0x0 _build/app_util_platform.o
+ .text          0x00000000        0x0 _build/nrf_assert.o
+ .data          0x00000000        0x0 _build/nrf_assert.o
+ .bss           0x00000000        0x0 _build/nrf_assert.o
+ .comment       0x00000000       0x71 _build/nrf_assert.o
+ .ARM.attributes
+                0x00000000       0x31 _build/nrf_assert.o
+ .text          0x00000000        0x0 _build/nrf_delay.o
+ .data          0x00000000        0x0 _build/nrf_delay.o
+ .bss           0x00000000        0x0 _build/nrf_delay.o
+ .text          0x00000000        0x0 _build/nrf_drv_common.o
+ .data          0x00000000        0x0 _build/nrf_drv_common.o
+ .bss           0x00000000        0x0 _build/nrf_drv_common.o
+ .text          0x00000000        0x0 _build/nrf_drv_gpiote.o
+ .data          0x00000000        0x0 _build/nrf_drv_gpiote.o
+ .bss           0x00000000        0x0 _build/nrf_drv_gpiote.o
+ .text.nrf_drv_gpiote_uninit
+                0x00000000      0x104 _build/nrf_drv_gpiote.o
+ .text.nrf_drv_gpiote_out_set
+                0x00000000       0x14 _build/nrf_drv_gpiote.o
+ .text.nrf_drv_gpiote_out_clear
+                0x00000000       0x14 _build/nrf_drv_gpiote.o
+ .text.nrf_drv_gpiote_out_toggle
+                0x00000000       0x2c _build/nrf_drv_gpiote.o
+ .text.nrf_drv_gpiote_out_task_disable
+                0x00000000       0x24 _build/nrf_drv_gpiote.o
+ .text.nrf_drv_gpiote_in_init
+                0x00000000      0x1b0 _build/nrf_drv_gpiote.o
+ .text.nrf_drv_gpiote_in_event_enable
+                0x00000000       0x98 _build/nrf_drv_gpiote.o
+ .text.nrf_drv_gpiote_in_event_disable
+                0x00000000       0x50 _build/nrf_drv_gpiote.o
+ .text.nrf_drv_gpiote_in_uninit
+                0x00000000       0x9c _build/nrf_drv_gpiote.o
+ .text.nrf_drv_gpiote_in_is_set
+                0x00000000       0x14 _build/nrf_drv_gpiote.o
+ .text.nrf_drv_gpiote_in_event_addr_get
+                0x00000000       0x20 _build/nrf_drv_gpiote.o
+ .text          0x00000000        0x0 _build/nrf_drv_ppi.o
+ .data          0x00000000        0x0 _build/nrf_drv_ppi.o
+ .bss           0x00000000        0x0 _build/nrf_drv_ppi.o
+ .text.nrf_drv_ppi_uninit
+                0x00000000       0x6c _build/nrf_drv_ppi.o
+ .text          0x00000000        0x0 _build/nrf_drv_timer.o
+ .data          0x00000000        0x0 _build/nrf_drv_timer.o
+ .bss           0x00000000        0x0 _build/nrf_drv_timer.o
+ .text.nrf_drv_timer_disable
+                0x00000000       0x14 _build/nrf_drv_timer.o
+ .text.nrf_drv_timer_resume
+                0x00000000        0x8 _build/nrf_drv_timer.o
+ .text.nrf_drv_timer_pause
+                0x00000000        0x8 _build/nrf_drv_timer.o
+ .text.nrf_drv_timer_increment
+                0x00000000        0x8 _build/nrf_drv_timer.o
+ .text.nrf_drv_timer_task_address_get
+                0x00000000        0x8 _build/nrf_drv_timer.o
+ .text.nrf_drv_timer_event_address_get
+                0x00000000        0x8 _build/nrf_drv_timer.o
+ .text.nrf_drv_timer_capture_task_address_get
+                0x00000000       0x10 _build/nrf_drv_timer.o
+ .text.nrf_drv_timer_capture
+                0x00000000       0x1c _build/nrf_drv_timer.o
+ .text.nrf_drv_timer_ms_to_ticks
+                0x00000000       0x1c _build/nrf_drv_timer.o
+ .text          0x00000000        0x0 _build/nrf_soc.o
+ .data          0x00000000        0x0 _build/nrf_soc.o
+ .bss           0x00000000        0x0 _build/nrf_soc.o
+ .text.sd_nvic_EnableIRQ
+                0x00000000       0x18 _build/nrf_soc.o
+ .text.sd_nvic_DisableIRQ
+                0x00000000       0x18 _build/nrf_soc.o
+ .text.sd_nvic_GetPendingIRQ
+                0x00000000       0x2c _build/nrf_soc.o
+ .text.sd_nvic_SetPendingIRQ
+                0x00000000       0x1c _build/nrf_soc.o
+ .text.sd_nvic_ClearPendingIRQ
+                0x00000000       0x1c _build/nrf_soc.o
+ .text.sd_nvic_SetPriority
+                0x00000000       0x68 _build/nrf_soc.o
+ .text.sd_nvic_GetPriority
+                0x00000000       0x44 _build/nrf_soc.o
+ .text.sd_nvic_SystemReset
+                0x00000000       0x18 _build/nrf_soc.o
+ .text.sd_nvic_critical_region_enter
+                0x00000000       0x1c _build/nrf_soc.o
+ .text.sd_nvic_critical_region_exit
+                0x00000000       0x1c _build/nrf_soc.o
+ .text.sd_app_evt_wait
+                0x00000000        0x8 _build/nrf_soc.o
+ .bss.m_in_critical_region
+                0x00000000        0x1 _build/nrf_soc.o
+ .comment       0x00000000       0x71 _build/nrf_soc.o
+ .ARM.attributes
+                0x00000000       0x31 _build/nrf_soc.o
+ .text          0x00000000        0x0 _build/bsp.o
+ .data          0x00000000        0x0 _build/bsp.o
+ .bss           0x00000000        0x0 _build/bsp.o
+ .text.alert_timer_handler
+                0x00000000       0x28 _build/bsp.o
+ .text.leds_timer_handler
+                0x00000000      0x2a4 _build/bsp.o
+ .rodata.leds_timer_handler
+                0x00000000       0x60 _build/bsp.o
+ .text.bsp_buttons_state_get
+                0x00000000        0x8 _build/bsp.o
+ .text.bsp_button_is_pressed
+                0x00000000        0x8 _build/bsp.o
+ .text.bsp_indication_set
+                0x00000000      0x318 _build/bsp.o
+ .rodata.bsp_indication_set
+                0x00000000       0x60 _build/bsp.o
+ .text.bsp_indication_text_set
+                0x00000000      0x318 _build/bsp.o
+ .rodata.bsp_indication_text_set
+                0x00000000       0x60 _build/bsp.o
+ .text.bsp_init
+                0x00000000       0x60 _build/bsp.o
+ .text.bsp_event_to_button_action_assign
+                0x00000000        0x4 _build/bsp.o
+ .text.bsp_buttons_enable
+                0x00000000        0x4 _build/bsp.o
+ .text.bsp_buttons_disable
+                0x00000000        0x4 _build/bsp.o
+ .text.bsp_wakeup_buttons_set
+                0x00000000        0x4 _build/bsp.o
+ .bss.m_indication_type
+                0x00000000        0x4 _build/bsp.o
+ .bss.m_app_ticks_per_100ms
+                0x00000000        0x4 _build/bsp.o
+ .bss.m_alert_timer_id
+                0x00000000        0x4 _build/bsp.o
+ .bss.m_stable_state
+                0x00000000        0x1 _build/bsp.o
+ .bss.m_leds_timer_id
+                0x00000000        0x4 _build/bsp.o
+ .comment       0x00000000       0x71 _build/bsp.o
+ .ARM.attributes
+                0x00000000       0x31 _build/bsp.o
+ .text          0x00000000        0x0 _build/main.o
+ .data          0x00000000        0x0 _build/main.o
+ .bss           0x00000000        0x0 _build/main.o
+ .text          0x00000000        0x0 _build/system_nrf51.o
+ .data          0x00000000        0x0 _build/system_nrf51.o
+ .bss           0x00000000        0x0 _build/system_nrf51.o
+ .text.SystemCoreClockUpdate
+                0x00000000       0x10 _build/system_nrf51.o
+ .data.SystemCoreClock
+                0x00000000        0x4 _build/system_nrf51.o
+ .data          0x00000000        0x0 _build/gcc_startup_nrf51.o
+ .bss           0x00000000        0x0 _build/gcc_startup_nrf51.o
+ .ARM.extab     0x00000000        0x0 _build/gcc_startup_nrf51.o
+ .data          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/libgcc.a(_udivsi3.o)
+ .bss           0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/libgcc.a(_udivsi3.o)
+ .data          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/libgcc.a(_dvmd_tls.o)
+ .bss           0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/libgcc.a(_dvmd_tls.o)
+ .text          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtend.o
+ .data          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtend.o
+ .bss           0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtend.o
+ .eh_frame      0x00000000        0x4 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtend.o
+ .jcr           0x00000000        0x4 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtend.o
+ .ARM.attributes
+                0x00000000       0x2c /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtend.o
+ .text          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtn.o
+ .data          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtn.o
+ .bss           0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtn.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x00000000         0x00040000         xr
+RAM              0x20000000         0x00004000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crti.o
+LOAD /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtbegin.o
+LOAD /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/crt0.o
+LOAD /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a
+LOAD /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libnosys.a
+LOAD _build/app_button.o
+LOAD _build/app_error.o
+LOAD _build/app_pwm.o
+LOAD _build/app_timer.o
+LOAD _build/app_util_platform.o
+LOAD _build/nrf_assert.o
+LOAD _build/nrf_delay.o
+LOAD _build/nrf_drv_common.o
+LOAD _build/nrf_drv_gpiote.o
+LOAD _build/nrf_drv_ppi.o
+LOAD _build/nrf_drv_timer.o
+LOAD _build/nrf_soc.o
+LOAD _build/bsp.o
+LOAD _build/main.o
+LOAD _build/system_nrf51.o
+LOAD _build/gcc_startup_nrf51.o
+START GROUP
+LOAD /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/libgcc.a
+LOAD /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a
+END GROUP
+START GROUP
+LOAD /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/libgcc.a
+LOAD /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a
+END GROUP
+LOAD /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtend.o
+LOAD /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtn.o
+START GROUP
+LOAD /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/libgcc.a
+LOAD /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc.a
+LOAD /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libnosys.a
+END GROUP
+
+.text           0x00000000     0x20f8
+ *(.Vectors)
+ .Vectors       0x00000000       0xc0 _build/gcc_startup_nrf51.o
+                0x00000000                __Vectors
+ *(.text*)
+ .text          0x000000c0       0x78 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/crt0.o
+                0x000000c0                _mainCRTStartup
+                0x000000c0                _start
+ .text.exit     0x00000138       0x2c /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-exit.o)
+                0x00000138                exit
+ .text.__libc_init_array
+                0x00000164       0x4c /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-init.o)
+                0x00000164                __libc_init_array
+ .text.memset   0x000001b0       0x10 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-memset.o)
+                0x000001b0                memset
+ .text._exit    0x000001c0        0x4 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libnosys.a(_exit.o)
+                0x000001c0                _exit
+ .text.app_error_handler
+                0x000001c4       0x18 _build/app_error.o
+                0x000001c4                app_error_handler
+ .text.pwm_ready_tick
+                0x000001dc       0x40 _build/app_pwm.o
+                0x000001dc                pwm_ready_tick
+ .text.pwm_transition_0or100_to_n
+                0x0000021c       0xd8 _build/app_pwm.o
+ .text.pwm_transition_n_to_0or100
+                0x000002f4       0xc4 _build/app_pwm.o
+ .text.pwm_transition_n_to_m
+                0x000003b8       0xd8 _build/app_pwm.o
+ .text.app_pwm_channel_pulsewidth_ticks_set
+                0x00000490      0x160 _build/app_pwm.o
+                0x00000490                app_pwm_channel_pulsewidth_ticks_set
+ .text.app_pwm_channel_duty_set
+                0x000005f0      0x180 _build/app_pwm.o
+                0x000005f0                app_pwm_channel_duty_set
+ .text.app_pwm_init
+                0x00000770      0x4ec _build/app_pwm.o
+                0x00000770                app_pwm_init
+ .text.app_pwm_enable
+                0x00000c5c       0x14 _build/app_pwm.o
+                0x00000c5c                app_pwm_enable
+ .text.rtc1_stop
+                0x00000c70       0x7c _build/app_timer.o
+ .text.RTC1_IRQHandler
+                0x00000cec       0xec _build/app_timer.o
+                0x00000cec                RTC1_IRQHandler
+ .text.SWI0_IRQHandler
+                0x00000dd8      0x4d0 _build/app_timer.o
+                0x00000dd8                SWI0_IRQHandler
+ .text.critical_region_enter
+                0x000012a8       0x10 _build/app_util_platform.o
+                0x000012a8                critical_region_enter
+ .text.critical_region_exit
+                0x000012b8       0x14 _build/app_util_platform.o
+                0x000012b8                critical_region_exit
+ .text.nrf_delay_ms
+                0x000012cc       0x3c _build/nrf_delay.o
+                0x000012cc                nrf_delay_ms
+ .text.nrf_drv_common_irq_enable
+                0x00001308       0x7c _build/nrf_drv_common.o
+                0x00001308                nrf_drv_common_irq_enable
+ .text.nrf_drv_gpiote_init
+                0x00001384       0x6c _build/nrf_drv_gpiote.o
+                0x00001384                nrf_drv_gpiote_init
+ .text.nrf_drv_gpiote_is_init
+                0x000013f0       0x10 _build/nrf_drv_gpiote.o
+                0x000013f0                nrf_drv_gpiote_is_init
+ .text.nrf_drv_gpiote_out_init
+                0x00001400       0xd0 _build/nrf_drv_gpiote.o
+                0x00001400                nrf_drv_gpiote_out_init
+ .text.nrf_drv_gpiote_out_uninit
+                0x000014d0       0x34 _build/nrf_drv_gpiote.o
+                0x000014d0                nrf_drv_gpiote_out_uninit
+ .text.nrf_drv_gpiote_out_task_enable
+                0x00001504       0x3c _build/nrf_drv_gpiote.o
+                0x00001504                nrf_drv_gpiote_out_task_enable
+ .text.nrf_drv_gpiote_out_task_addr_get
+                0x00001540       0x1c _build/nrf_drv_gpiote.o
+                0x00001540                nrf_drv_gpiote_out_task_addr_get
+ .text.nrf_drv_gpiote_out_task_force
+                0x0000155c       0x38 _build/nrf_drv_gpiote.o
+                0x0000155c                nrf_drv_gpiote_out_task_force
+ .text.nrf_drv_gpiote_out_task_trigger
+                0x00001594       0x20 _build/nrf_drv_gpiote.o
+                0x00001594                nrf_drv_gpiote_out_task_trigger
+ .text.GPIOTE_IRQHandler
+                0x000015b4      0x240 _build/nrf_drv_gpiote.o
+                0x000015b4                GPIOTE_IRQHandler
+ .text.nrf_drv_ppi_init
+                0x000017f4       0x18 _build/nrf_drv_ppi.o
+                0x000017f4                nrf_drv_ppi_init
+ .text.nrf_drv_ppi_channel_alloc
+                0x0000180c       0x5c _build/nrf_drv_ppi.o
+                0x0000180c                nrf_drv_ppi_channel_alloc
+ .text.nrf_drv_ppi_channel_free
+                0x00001868       0x34 _build/nrf_drv_ppi.o
+                0x00001868                nrf_drv_ppi_channel_free
+ .text.nrf_drv_ppi_channel_assign
+                0x0000189c       0x48 _build/nrf_drv_ppi.o
+                0x0000189c                nrf_drv_ppi_channel_assign
+ .text.nrf_drv_ppi_channel_enable
+                0x000018e4       0x34 _build/nrf_drv_ppi.o
+                0x000018e4                nrf_drv_ppi_channel_enable
+ .text.nrf_drv_ppi_channel_disable
+                0x00001918       0x34 _build/nrf_drv_ppi.o
+                0x00001918                nrf_drv_ppi_channel_disable
+ .text.nrf_drv_ppi_group_alloc
+                0x0000194c       0x58 _build/nrf_drv_ppi.o
+                0x0000194c                nrf_drv_ppi_group_alloc
+ .text.nrf_drv_ppi_group_free
+                0x000019a4       0x40 _build/nrf_drv_ppi.o
+                0x000019a4                nrf_drv_ppi_group_free
+ .text.nrf_drv_ppi_group_enable
+                0x000019e4       0x30 _build/nrf_drv_ppi.o
+                0x000019e4                nrf_drv_ppi_group_enable
+ .text.nrf_drv_ppi_group_disable
+                0x00001a14       0x24 _build/nrf_drv_ppi.o
+                0x00001a14                nrf_drv_ppi_group_disable
+ .text.nrf_drv_ppi_channels_remove_from_group
+                0x00001a38       0x4c _build/nrf_drv_ppi.o
+                0x00001a38                nrf_drv_ppi_channels_remove_from_group
+ .text.nrf_drv_ppi_channels_include_in_group
+                0x00001a84       0x4c _build/nrf_drv_ppi.o
+                0x00001a84                nrf_drv_ppi_channels_include_in_group
+ .text.nrf_drv_timer_init
+                0x00001ad0       0xa0 _build/nrf_drv_timer.o
+                0x00001ad0                nrf_drv_timer_init
+ .text.nrf_drv_timer_uninit
+                0x00001b70       0x74 _build/nrf_drv_timer.o
+                0x00001b70                nrf_drv_timer_uninit
+ .text.nrf_drv_timer_enable
+                0x00001be4       0x14 _build/nrf_drv_timer.o
+                0x00001be4                nrf_drv_timer_enable
+ .text.nrf_drv_timer_clear
+                0x00001bf8        0x8 _build/nrf_drv_timer.o
+                0x00001bf8                nrf_drv_timer_clear
+ .text.nrf_drv_timer_compare_event_address_get
+                0x00001c00       0x10 _build/nrf_drv_timer.o
+                0x00001c00                nrf_drv_timer_compare_event_address_get
+ .text.nrf_drv_timer_capture_get
+                0x00001c10        0xc _build/nrf_drv_timer.o
+                0x00001c10                nrf_drv_timer_capture_get
+ .text.nrf_drv_timer_compare
+                0x00001c1c       0x2c _build/nrf_drv_timer.o
+                0x00001c1c                nrf_drv_timer_compare
+ .text.nrf_drv_timer_extended_compare
+                0x00001c48       0x4c _build/nrf_drv_timer.o
+                0x00001c48                nrf_drv_timer_extended_compare
+ .text.nrf_drv_timer_us_to_ticks
+                0x00001c94       0x1c _build/nrf_drv_timer.o
+                0x00001c94                nrf_drv_timer_us_to_ticks
+ .text.nrf_drv_timer_compare_int_enable
+                0x00001cb0       0x24 _build/nrf_drv_timer.o
+                0x00001cb0                nrf_drv_timer_compare_int_enable
+ .text.nrf_drv_timer_compare_int_disable
+                0x00001cd4       0x14 _build/nrf_drv_timer.o
+                0x00001cd4                nrf_drv_timer_compare_int_disable
+ .text.TIMER0_IRQHandler
+                0x00001ce8       0xc0 _build/nrf_drv_timer.o
+                0x00001ce8                TIMER0_IRQHandler
+ .text.TIMER1_IRQHandler
+                0x00001da8       0xc0 _build/nrf_drv_timer.o
+                0x00001da8                TIMER1_IRQHandler
+ .text.pwm_ready_callback
+                0x00001e68        0xc _build/main.o
+                0x00001e68                pwm_ready_callback
+ .text.startup.main
+                0x00001e74       0xb0 _build/main.o
+                0x00001e74                main
+ .text.SystemInit
+                0x00001f24       0x8c _build/system_nrf51.o
+                0x00001f24                SystemInit
+ .text          0x00001fb0       0x54 _build/gcc_startup_nrf51.o
+                0x00001fb0                Reset_Handler
+                0x00001ff8                NMI_Handler
+                0x00001ffa                HardFault_Handler
+                0x00001ffc                SVC_Handler
+                0x00001ffe                PendSV_Handler
+                0x00002000                SysTick_Handler
+                0x00002002                TIMER2_IRQHandler
+                0x00002002                SPI0_TWI0_IRQHandler
+                0x00002002                RTC0_IRQHandler
+                0x00002002                POWER_CLOCK_IRQHandler
+                0x00002002                RADIO_IRQHandler
+                0x00002002                LPCOMP_IRQHandler
+                0x00002002                SWI4_IRQHandler
+                0x00002002                TEMP_IRQHandler
+                0x00002002                QDEC_IRQHandler
+                0x00002002                UART0_IRQHandler
+                0x00002002                SWI5_IRQHandler
+                0x00002002                ECB_IRQHandler
+                0x00002002                Default_Handler
+                0x00002002                ADC_IRQHandler
+                0x00002002                SWI3_IRQHandler
+                0x00002002                CCM_AAR_IRQHandler
+                0x00002002                WDT_IRQHandler
+                0x00002002                SWI2_IRQHandler
+                0x00002002                RNG_IRQHandler
+                0x00002002                SPI1_TWI1_IRQHandler
+                0x00002002                SWI1_IRQHandler
+ .text          0x00002004       0x9c /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/libgcc.a(_udivsi3.o)
+                0x00002004                __udivsi3
+                0x00002004                __aeabi_uidiv
+                0x0000208c                __aeabi_uidivmod
+ .text          0x000020a0        0x4 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/libgcc.a(_dvmd_tls.o)
+                0x000020a0                __aeabi_ldiv0
+                0x000020a0                __aeabi_idiv0
+ *(.init)
+ .init          0x000020a4        0x4 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crti.o
+                0x000020a4                _init
+ .init          0x000020a8        0x8 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtn.o
+ *(.fini)
+ .fini          0x000020b0        0x4 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crti.o
+                0x000020b0                _fini
+ .fini          0x000020b4        0x8 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtn.o
+ *crtbegin.o(.ctors)
+ *crtbegin?.o(.ctors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
+ *(SORT(.ctors.*))
+ *(.ctors)
+ *crtbegin.o(.dtors)
+ *crtbegin?.o(.dtors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .dtors)
+ *(SORT(.dtors.*))
+ *(.dtors)
+ *(.rodata*)
+ .rodata.str1.1
+                0x000020bc        0x2 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-impure.o)
+ *fill*         0x000020be        0x2 
+ .rodata._global_impure_ptr
+                0x000020c0        0x4 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-impure.o)
+                0x000020c0                _global_impure_ptr
+ .rodata.m_default_config
+                0x000020c4       0x10 _build/nrf_drv_timer.o
+ .rodata        0x000020d4       0x14 _build/main.o
+ .rodata.m_pwm_PWM1_timer
+                0x000020e8        0x8 _build/main.o
+                0x000020e8                m_pwm_PWM1_timer
+ .rodata.PWM1   0x000020f0        0x8 _build/main.o
+                0x000020f0                PWM1
+ *(.eh_frame*)
+                0x000020f8                . = ALIGN (0x4)
+
+.glue_7         0x000020f8        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x000020f8        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x000020f8        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x000020f8        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.iplt           0x000020f8        0x0
+ .iplt          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtbegin.o
+
+.ARM.extab      0x000020f8        0x0
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x000020f8                . = ALIGN (0x4)
+                0x000020f8                __exidx_start = .
+
+.ARM.exidx      0x000020f8        0x8
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+ .ARM.exidx     0x000020f8        0x8 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/crt0.o
+ .ARM.exidx     0x00002100        0x0 _build/gcc_startup_nrf51.o
+                                  0x8 (size before relaxing)
+                0x00002100                . = ALIGN (0x4)
+                0x00002100                __exidx_end = .
+                0x00002100                __etext = .
+
+.rel.dyn        0x00002100        0x0
+ .rel.iplt      0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtbegin.o
+
+.data           0x20000000       0x60 load address 0x00002100
+                0x20000000                __data_start__ = .
+ *(vtable)
+ *(.data*)
+ .data.impure_data
+                0x20000000       0x60 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-impure.o)
+                0x20000060                . = ALIGN (0x4)
+                0x20000060                PROVIDE (__preinit_array_start, .)
+ *(.preinit_array)
+                0x20000060                PROVIDE (__preinit_array_end, .)
+                0x20000060                . = ALIGN (0x4)
+                0x20000060                PROVIDE (__init_array_start, .)
+ *(SORT(.init_array.*))
+ *(.init_array)
+                0x20000060                PROVIDE (__init_array_end, .)
+                0x20000060                . = ALIGN (0x4)
+                0x20000060                PROVIDE (__fini_array_start, .)
+ *(SORT(.fini_array.*))
+ *(.fini_array)
+                0x20000060                PROVIDE (__fini_array_end, .)
+ *(.jcr)
+                0x20000060                . = ALIGN (0x4)
+                0x20000060                __data_end__ = .
+
+.igot.plt       0x20000060        0x0 load address 0x00002160
+ .igot.plt      0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtbegin.o
+
+.bss            0x20000060       0xd0 load address 0x00002160
+                0x20000060                . = ALIGN (0x4)
+                0x20000060                __bss_start__ = .
+ *(.bss*)
+ .bss.m_instances
+                0x20000060        0x8 _build/app_pwm.o
+ .bss.m_ticks_latest
+                0x20000068        0x4 _build/app_timer.o
+ .bss.m_evt_schedule_func
+                0x2000006c        0x4 _build/app_timer.o
+ .bss.mp_nodes  0x20000070        0x4 _build/app_timer.o
+ .bss.m_user_array_size
+                0x20000074        0x1 _build/app_timer.o
+ *fill*         0x20000075        0x3 
+ .bss.mp_users  0x20000078        0x4 _build/app_timer.o
+ .bss.m_ticks_elapsed_q_read_ind
+                0x2000007c        0x1 _build/app_timer.o
+ .bss.m_ticks_elapsed_q_write_ind
+                0x2000007d        0x1 _build/app_timer.o
+ *fill*         0x2000007e        0x2 
+ .bss.m_timer_id_head
+                0x20000080        0x4 _build/app_timer.o
+ .bss.m_rtc1_reset
+                0x20000084        0x1 _build/app_timer.o
+ *fill*         0x20000085        0x3 
+ .bss.m_ticks_elapsed
+                0x20000088        0x8 _build/app_timer.o
+ .bss.m_rtc1_running
+                0x20000090        0x1 _build/app_timer.o
+ *fill*         0x20000091        0x3 
+ .bss.m_in_critical_region
+                0x20000094        0x4 _build/app_util_platform.o
+ .bss.m_cb      0x20000098       0x50 _build/nrf_drv_gpiote.o
+ .bss.m_drv_state
+                0x200000e8        0x1 _build/nrf_drv_ppi.o
+ .bss.m_groups_allocated
+                0x200000e9        0x1 _build/nrf_drv_ppi.o
+ *fill*         0x200000ea        0x2 
+ .bss.m_channels_allocated
+                0x200000ec        0x4 _build/nrf_drv_ppi.o
+ .bss.m_timer_event_handlers
+                0x200000f0        0x8 _build/nrf_drv_timer.o
+ .bss.mp_contexts
+                0x200000f8        0x8 _build/nrf_drv_timer.o
+ .bss.m_cb      0x20000100        0x4 _build/nrf_drv_timer.o
+ .bss.ready_flag
+                0x20000104        0x1 _build/main.o
+ *(COMMON)
+ *fill*         0x20000105        0x3 
+ COMMON         0x20000108        0x2 _build/app_pwm.o
+                0x20000108                m_pwm_ready_counter
+ *fill*         0x2000010a        0x2 
+ COMMON         0x2000010c       0x24 _build/main.o
+                0x2000010c                m_pwm_PWM1_cb
+                0x20000130                . = ALIGN (0x4)
+                0x20000130                __bss_end__ = .
+
+.heap           0x20000130      0x800
+                0x20000130                __end__ = .
+                0x20000130                end = __end__
+ *(.heap*)
+ .heap          0x20000130      0x800 _build/gcc_startup_nrf51.o
+                0x20000130                __HeapBase
+                0x20000930                __HeapLimit = .
+
+.stack_dummy    0x20000130      0x800
+ *(.stack*)
+ .stack         0x20000130      0x800 _build/gcc_startup_nrf51.o
+                0x20004000                __StackTop = (ORIGIN (RAM) + 0x4000)
+                0x20003800                __StackLimit = (__StackTop - SIZEOF (.stack_dummy))
+                0x20004000                PROVIDE (__stack, __StackTop)
+                0x00000001                ASSERT ((__StackLimit >= __HeapLimit), region RAM overflowed with stack)
+OUTPUT(_build/nrf51422_xxac.out elf32-littlearm)
+
+.ARM.attributes
+                0x00000000       0x28
+ .ARM.attributes
+                0x00000000       0x1e /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crti.o
+ .ARM.attributes
+                0x0000001e       0x1b /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/crt0.o
+ .ARM.attributes
+                0x00000039       0x2c /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-exit.o)
+ .ARM.attributes
+                0x00000065       0x2c /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-impure.o)
+ .ARM.attributes
+                0x00000091       0x2c /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-init.o)
+ .ARM.attributes
+                0x000000bd       0x2c /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-memset.o)
+ .ARM.attributes
+                0x000000e9       0x2c /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libnosys.a(_exit.o)
+ .ARM.attributes
+                0x00000115       0x31 _build/app_error.o
+ .ARM.attributes
+                0x00000146       0x31 _build/app_pwm.o
+ .ARM.attributes
+                0x00000177       0x31 _build/app_timer.o
+ .ARM.attributes
+                0x000001a8       0x31 _build/app_util_platform.o
+ .ARM.attributes
+                0x000001d9       0x31 _build/nrf_delay.o
+ .ARM.attributes
+                0x0000020a       0x31 _build/nrf_drv_common.o
+ .ARM.attributes
+                0x0000023b       0x31 _build/nrf_drv_gpiote.o
+ .ARM.attributes
+                0x0000026c       0x31 _build/nrf_drv_ppi.o
+ .ARM.attributes
+                0x0000029d       0x31 _build/nrf_drv_timer.o
+ .ARM.attributes
+                0x000002ce       0x31 _build/main.o
+ .ARM.attributes
+                0x000002ff       0x31 _build/system_nrf51.o
+ .ARM.attributes
+                0x00000330       0x1b _build/gcc_startup_nrf51.o
+ .ARM.attributes
+                0x0000034b       0x1e /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x00000369       0x1e /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/libgcc.a(_dvmd_tls.o)
+ .ARM.attributes
+                0x00000387       0x1e /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtn.o
+
+.comment        0x00000000       0x70
+ .comment       0x00000000       0x70 _build/app_error.o
+                                 0x71 (size before relaxing)
+ .comment       0x00000000       0x71 _build/app_pwm.o
+ .comment       0x00000000       0x71 _build/app_timer.o
+ .comment       0x00000000       0x71 _build/app_util_platform.o
+ .comment       0x00000000       0x71 _build/nrf_delay.o
+ .comment       0x00000000       0x71 _build/nrf_drv_common.o
+ .comment       0x00000000       0x71 _build/nrf_drv_gpiote.o
+ .comment       0x00000000       0x71 _build/nrf_drv_ppi.o
+ .comment       0x00000000       0x71 _build/nrf_drv_timer.o
+ .comment       0x00000000       0x71 _build/main.o
+ .comment       0x00000000       0x71 _build/system_nrf51.o
+
+.debug_frame    0x00000000       0xb4
+ .debug_frame   0x00000000       0x28 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-exit.o)
+ .debug_frame   0x00000028       0x2c /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-init.o)
+ .debug_frame   0x00000054       0x20 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-memset.o)
+ .debug_frame   0x00000074       0x20 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libnosys.a(_exit.o)
+ .debug_frame   0x00000094       0x20 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/libgcc.a(_udivsi3.o)
