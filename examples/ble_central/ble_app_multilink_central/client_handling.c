@@ -18,7 +18,7 @@
 #include "ble_srv_common.h"
 #include "boards.h"
 
-APP_PWM_INSTANCE(PWM1,1); // Create the PWM1 instance using TIMER1
+APP_PWM_INSTANCE(PWM1,2); // Create the PWM1 instance using TIMER2
 
 #define LED_PIN_NO_OFFSET                 8                                                 /**< LED pin number offset. */
 
@@ -212,14 +212,16 @@ static void on_evt_hvx(ble_evt_t * p_ble_evt, client_t * p_client, uint32_t inde
                 if (p_ble_evt->evt.gattc_evt.params.hvx.data[0] == 0)
                 {
                     LEDS_OFF(1<<leds[index]);
+		    while(app_pwm_channel_duty_set(&PWM1, 0, 100) == NRF_ERROR_BUSY);
 		    // Diasble PWM output
-		    app_pwm_disable(&PWM1);
+		    //app_pwm_disable(&PWM1);
                 }
                 else
                 {
                     LEDS_ON(1<<leds[index]);
 		    // Enable PWM output
-		    app_pwm_enable(&PWM1);
+		    //app_pwm_enable(&PWM1);
+		    while(app_pwm_channel_duty_set(&PWM1, 0, 50) == NRF_ERROR_BUSY);
                 }
             }
         }

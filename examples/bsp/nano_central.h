@@ -17,26 +17,26 @@
 #ifndef REDBEAR_NANO_C_H__
 #define REDBEAR_NANO_C_H__
 
-#define LEDS_NUMBER    2//3
+#define LEDS_NUMBER    3
 
 #define LED_OB	   19 // onboard LED
-//#define LED_PWM    15 // LED soldered to I/O P0_15
+#define LED_PWM    15 // LED soldered to I/O P0_15
 #define LED_ADD    7  // LED soldered to I/O P0_7
 
 #define LED_START  LED_ADD
 #define BSP_LED_0  LED_ADD
-//#define BSP_LED_1  LED_PWM
-#define BSP_LED_1  LED_OB
+#define BSP_LED_1  LED_PWM
+#define BSP_LED_2  LED_OB
 #define LED_STOP   LED_OB
 
 #define BUTTONS_LIST {}
-#define LEDS_LIST { BSP_LED_0, BSP_LED_1/*, BSP_LED_2 */}
+#define LEDS_LIST { BSP_LED_0, BSP_LED_1, BSP_LED_2 }
 
 #define BSP_LED_0_MASK    (1<<BSP_LED_0)
 #define BSP_LED_1_MASK    (1<<BSP_LED_1)
-//#define BSP_LED_2_MASK    (1<<BSP_LED_2)
+#define BSP_LED_2_MASK    (1<<BSP_LED_2)
 
-#define LEDS_MASK      (BSP_LED_0_MASK | BSP_LED_1_MASK/* | BSP_LED_2_MASK*/)
+#define LEDS_MASK      (BSP_LED_0_MASK | BSP_LED_1_MASK | BSP_LED_2_MASK)
 #define LEDS_INV_MASK  LEDS_MASK
 
 // there are no buttons on this board

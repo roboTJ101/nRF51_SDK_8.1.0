@@ -471,11 +471,12 @@ static void pwm_init(void) {
     
     ret_code_t err_code;
     /* 1-channel PWM, 200Hz, output to pin 15 */
-    app_pwm_config_t pwm1_cfg = APP_PWM_DEFAULT_CONFIG_1CH(5000L, 15);
+    app_pwm_config_t pwm1_cfg = APP_PWM_DEFAULT_CONFIG_1CH(5000L, BSP_LED_1);
     err_code = app_pwm_init(&PWM1,&pwm1_cfg,pwm_ready_callback);
     APP_ERROR_CHECK(err_code);
     /* Keep trying to set duty cycle until PWM ready */
     while(app_pwm_channel_duty_set(&PWM1, 0, 50) == NRF_ERROR_BUSY);
+    app_pwm_enable(&PWM1);
 
 }
 
