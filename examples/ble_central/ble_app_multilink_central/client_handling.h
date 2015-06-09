@@ -23,8 +23,14 @@
 #include <stdbool.h>
 #include "ble.h"
 #include "device_manager.h"
+#include "app_pwm.h"
 
 #define MAX_CLIENTS  DEVICE_MANAGER_MAX_CONNECTIONS  /**< Max number of clients. */
+
+//APP_PWM_INSTANCE(PWM1,1); // Create the PWM1 instance using TIMER1
+const nrf_drv_timer_t m_pwm_PWM1_timer;
+uint32_t m_pwm_PWM1_cb[APP_PWM_CB_SIZE];
+const app_pwm_t PWM1;
 
 /**@brief Funtion for initializing the module.
  */
@@ -35,6 +41,13 @@ void client_handling_init(void);
  * @return  The current number of clients.
  */
 uint8_t client_handling_count(void);
+
+/**@brief Function for setting pwm flag after set up is complete
+ *
+ * @param[in] pwm_id ID of the PWM instance
+ *
+ */
+void pwm_ready_callback(uint32_t pwm_id);
 
 /**@brief Funtion for creating a new client.
  *

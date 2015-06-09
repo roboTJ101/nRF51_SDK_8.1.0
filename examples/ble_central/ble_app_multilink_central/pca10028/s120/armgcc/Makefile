@@ -38,6 +38,8 @@ remduplicates = $(strip $(if $1,$(firstword $1) $(call remduplicates,$(filter-ou
 #source common to all targets
 C_SOURCE_FILES += \
 ../../../../../../components/libraries/util/app_error.c \
+../../../../../../components/libraries/pwm/app_pwm.c \
+../../../../../../components/libraries/timer/app_timer.c \
 ../../../../../../components/libraries/fifo/app_fifo.c \
 ../../../../../../components/libraries/trace/app_trace.c \
 ../../../../../../components/libraries/util/nrf_assert.c \
@@ -45,6 +47,8 @@ C_SOURCE_FILES += \
 ../../../../../../components/drivers_nrf/uart/app_uart_fifo.c \
 ../../../../../../components/drivers_nrf/common/nrf_drv_common.c \
 ../../../../../../components/drivers_nrf/gpiote/nrf_drv_gpiote.c \
+../../../../../../components/drivers_nrf/ppi/nrf_drv_ppi.c \
+../../../../../../components/drivers_nrf/timer/nrf_drv_timer.c \
 ../../../../../../components/drivers_nrf/pstorage/pstorage.c \
 ../../../client_handling.c \
 ../../../main.c \
@@ -69,6 +73,7 @@ INC_PATHS += -I../../../../../../components/drivers_nrf/common
 INC_PATHS += -I../../../../../../components/libraries/trace
 INC_PATHS += -I../../../../../../components/drivers_nrf/config
 INC_PATHS += -I../../../../../bsp
+INC_PATHS += -I../../../../../../components/libraries/pwm
 INC_PATHS += -I../../../../../../components/libraries/fifo
 INC_PATHS += -I../../../../../../components/drivers_nrf/gpiote
 INC_PATHS += -I../../../../../../components/ble/device_manager
@@ -78,6 +83,8 @@ INC_PATHS += -I../../../../../../components/ble/ble_db_discovery
 INC_PATHS += -I../../../../../../components/softdevice/common/softdevice_handler
 INC_PATHS += -I../../../../../../components/softdevice/s120/headers
 INC_PATHS += -I../../../../../../components/drivers_nrf/hal
+INC_PATHS += -I../../../../../../components/drivers_nrf/timer
+INC_PATHS += -I../../../../../../components/drivers_nrf/ppi
 
 OBJECT_DIRECTORY = _build
 LISTING_DIRECTORY = $(OBJECT_DIRECTORY)

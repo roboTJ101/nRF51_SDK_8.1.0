@@ -18,6 +18,8 @@
 #include "ble_srv_common.h"
 #include "boards.h"
 
+APP_PWM_INSTANCE(PWM1,1); // Create the PWM1 instance using TIMER1
+
 #define LED_PIN_NO_OFFSET                 8                                                 /**< LED pin number offset. */
 
 #define MULTILINK_PERIPHERAL_BASE_UUID    {{0xB3, 0x58, 0x55, 0x40, 0x50, 0x60, 0x11, 0xe3,\
@@ -48,6 +50,11 @@ static client_t         m_client[MAX_CLIENTS];      /**< Client context informat
 static uint8_t          m_client_count;             /**< Number of clients. */
 static uint8_t          m_base_uuid_type;           /**< UUID type. */
 
+static volatile bool ready_flag; // A flag indicating PWM status
+
+void pwm_ready_callback(uint32_t pwm_id) {
+    ready_flag = true;
+};
 
 /**@brief Function for finding client context information based on handle.
  *
@@ -205,10 +212,14 @@ static void on_evt_hvx(ble_evt_t * p_ble_evt, client_t * p_client, uint32_t inde
                 if (p_ble_evt->evt.gattc_evt.params.hvx.data[0] == 0)
                 {
                     LEDS_OFF(1<<leds[index]);
+		    // Diasble PWM output
+		    app_pwm_disable(&PWM1);
                 }
                 else
                 {
                     LEDS_ON(1<<leds[index]);
+		    // Enable PWM output
+		    app_pwm_enable(&PWM1);
                 }
             }
         }
