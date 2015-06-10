@@ -119,7 +119,7 @@ static sensorsim_state_t                 m_heart_rate_sim_state;                
 static app_timer_id_t                    m_battery_timer_id;                        /**< Battery timer. */
 static app_timer_id_t                    m_heart_rate_timer_id;                     /**< Heart rate measurement timer. */
 //static app_timer_id_t                    m_rr_interval_timer_id;                    /**< RR interval timer. */
-static app_timer_id_t                    m_sensor_contact_timer_id;                 /**< Sensor contact detected timer. */
+//static app_timer_id_t                    m_sensor_contact_timer_id;                 /**< Sensor contact detected timer. */
 
 static dm_application_instance_t         m_app_handle;                              /**< Application identifier allocated by device manager */
 
@@ -249,15 +249,15 @@ static void heart_rate_meas_timeout_handler(void * p_context)
  * @param[in] p_context  Pointer used for passing some arbitrary information (context) from the
  *                       app_start_timer() call to the timeout handler.
  */
-static void sensor_contact_detected_timeout_handler(void * p_context)
-{
-    static bool sensor_contact_detected = false;
+/*static void sensor_contact_detected_timeout_handler(void * p_context)*/
+/*{*/
+/*    static bool sensor_contact_detected = false;*/
 
-    UNUSED_PARAMETER(p_context);
+/*    UNUSED_PARAMETER(p_context);*/
 
-    sensor_contact_detected = !sensor_contact_detected;
-    ble_hrs_sensor_contact_detected_update(&m_hrs, sensor_contact_detected);
-}
+/*    sensor_contact_detected = !sensor_contact_detected;*/
+/*    ble_hrs_sensor_contact_detected_update(&m_hrs, sensor_contact_detected);*/
+/*}*/
 
 
 /**@brief Function for the Timer initialization.
@@ -287,10 +287,10 @@ static void timers_init(void)
 /*                                rr_interval_timeout_handler);*/
 /*    APP_ERROR_CHECK(err_code);*/
 
-    err_code = app_timer_create(&m_sensor_contact_timer_id,
-                                APP_TIMER_MODE_REPEATED,
-                                sensor_contact_detected_timeout_handler);
-    APP_ERROR_CHECK(err_code);
+/*    err_code = app_timer_create(&m_sensor_contact_timer_id,*/
+/*                                APP_TIMER_MODE_REPEATED,*/
+/*                                sensor_contact_detected_timeout_handler);*/
+/*    APP_ERROR_CHECK(err_code);*/
 }
 
 
@@ -436,16 +436,16 @@ static void services_init(void)
     ble_hrs_init_t hrs_init;
     ble_bas_init_t bas_init;
 /*    ble_dis_init_t dis_init;*/
-    uint8_t        body_sensor_location;
+/*    uint8_t        body_sensor_location;*/
 
     // Initialize Heart Rate Service.
-    body_sensor_location = BLE_HRS_BODY_SENSOR_LOCATION_FINGER;
+/*    body_sensor_location = BLE_HRS_BODY_SENSOR_LOCATION_FINGER;*/
 
     memset(&hrs_init, 0, sizeof(hrs_init));
 
     hrs_init.evt_handler                 = NULL;
-    hrs_init.is_sensor_contact_supported = true;
-    hrs_init.p_body_sensor_location      = &body_sensor_location;
+    hrs_init.is_sensor_contact_supported = false;
+/*    hrs_init.p_body_sensor_location      = &body_sensor_location;*/
 
     // Here the sec level for the Heart Rate Service can be changed/increased.
     BLE_GAP_CONN_SEC_MODE_SET_OPEN(&hrs_init.hrs_hrm_attr_md.cccd_write_perm);
@@ -552,8 +552,8 @@ static void application_timers_start(void)
 /*    err_code = app_timer_start(m_rr_interval_timer_id, RR_INTERVAL_INTERVAL, NULL);*/
 /*    APP_ERROR_CHECK(err_code);*/
 
-    err_code = app_timer_start(m_sensor_contact_timer_id, SENSOR_CONTACT_DETECTED_INTERVAL, NULL);
-    APP_ERROR_CHECK(err_code);
+/*    err_code = app_timer_start(m_sensor_contact_timer_id, SENSOR_CONTACT_DETECTED_INTERVAL, NULL);*/
+/*    APP_ERROR_CHECK(err_code);*/
 }
 
 
