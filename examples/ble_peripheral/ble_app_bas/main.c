@@ -20,6 +20,7 @@
 
 #include <stdint.h>
 #include <string.h>
+//#include <math.h>
 #include "nordic_common.h"
 #include "nrf.h"
 #include "nrf_adc.h" // ADC plz
@@ -145,8 +146,10 @@ static void battery_level_update(void)
     uint32_t err_code;
     uint8_t  battery_level;
 
-    battery_level = (uint8_t)sensorsim_measure(&m_battery_sim_state, &m_battery_sim_cfg);
-    //battery_level = (uint8_t)((adc_sample/1023)*100);
+    //battery_level = (uint8_t)sensorsim_measure(&m_battery_sim_state, &m_battery_sim_cfg);
+    printf("\n\rBegin conversion: ADC value = %d \r\n", (int)adc_sample);
+    battery_level = (uint8_t)((float)adc_sample/9);
+    printf("\n\rConversion complete: batt level = %d \r\n", (int)battery_level);
 
     err_code = ble_bas_battery_level_update(&m_bas, battery_level);
     if ((err_code != NRF_SUCCESS) &&
@@ -225,7 +228,9 @@ void adc_config(void)
 static void battery_level_meas_timeout_handler(void * p_context)
 {
     UNUSED_PARAMETER(p_context);
+    nrf_adc_int_disable(ADC_INTENSET_END_Enabled << ADC_INTENSET_END_Pos);
     battery_level_update();
+    nrf_adc_int_enable(ADC_INTENSET_END_Enabled << ADC_INTENSET_END_Pos);
 }
 
 /*@brief Function for the Timer initialization.
