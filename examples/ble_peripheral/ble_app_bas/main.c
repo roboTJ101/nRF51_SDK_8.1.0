@@ -22,6 +22,7 @@
 #include <string.h>
 #include "nordic_common.h"
 #include "nrf.h"
+#include "nrf_adc.h" // ADC plz
 #include "app_error.h"
 #include "nrf51_bitfields.h"
 #include "ble.h"
@@ -30,14 +31,11 @@
 #include "ble_advdata.h"
 #include "ble_advertising.h"
 #include "ble_bas.h"
-#include "ble_hrs.h"
-#include "ble_dis.h"
-#ifdef BLE_DFU_APP_SUPPORT
-#include "ble_dfu.h"
-#include "dfu_app_handler.h"
-#endif // BLE_DFU_APP_SUPPORT
+//#include "ble_hrs.h"
+//#include "ble_dis.h"
 #include "ble_conn_params.h"
 #include "boards.h"
+#include "app_uart.h" // UART plz
 #include "sensorsim.h"
 #include "softdevice_handler.h"
 #include "app_timer.h"
@@ -47,6 +45,15 @@
 #include "bsp.h"
 #include "nrf_delay.h"
 #include "bsp_btn_ble.h"
+
+volatile int32_t adc_sample = 0;
+
+#define UART_TX_BUF_SIZE 256 /**< UART TX buffer size. */
+#define UART_RX_BUF_SIZE 1   /**< UART RX buffer size. */
+
+#ifndef NRF_APP_PRIORITY_HIGH
+#define NRF_APP_PRIORITY_HIGH 1
+#endif
 
 #define IS_SRVC_CHANGED_CHARACT_PRESENT  1                                          /**< Include or not the service_changed characteristic. if not enabled, the server's database cannot be changed for the lifetime of the device*/
 
@@ -60,7 +67,7 @@
 #define APP_TIMER_OP_QUEUE_SIZE          4                                          /**< Size of timer operation queues. */
 
 #define BATTERY_LEVEL_MEAS_INTERVAL      APP_TIMER_TICKS(2000, APP_TIMER_PRESCALER) /**< Battery level measurement interval (ticks). */
-#define MIN_BATTERY_LEVEL                81                                         /**< Minimum simulated battery level. */
+#define MIN_BATTERY_LEVEL                0                                         /**< Minimum simulated battery level. */
 #define MAX_BATTERY_LEVEL                100                                        /**< Maximum simulated battery level. */
 #define BATTERY_LEVEL_INCREMENT          1                                          /**< Increment between each simulated battery level measurement. */
 
@@ -110,6 +117,25 @@ void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
     app_error_handler(DEAD_BEEF, line_num, p_file_name);
 }
 
+/**
+ * @brief UART events handler.
+ */
+void uart_events_handler(app_uart_evt_t * p_event)
+{
+    switch (p_event->evt_type)
+    {
+        case APP_UART_COMMUNICATION_ERROR: APP_ERROR_HANDLER(p_event->data.error_communication);
+            break;
+
+        case APP_UART_FIFO_ERROR:          APP_ERROR_HANDLER(p_event->data.error_code);
+            break;
+
+        case APP_UART_TX_EMPTY:            printf("%d\r\n", (int)adc_sample); // out ADC result
+            break;
+
+        default: break;
+    }
+}
 
 /**@brief Function for performing battery measurement and updating the Battery Level characteristic
  *        in Battery Service.
@@ -120,6 +146,7 @@ static void battery_level_update(void)
     uint8_t  battery_level;
 
     battery_level = (uint8_t)sensorsim_measure(&m_battery_sim_state, &m_battery_sim_cfg);
+    //battery_level = (uint8_t)((adc_sample/1023)*100);
 
     err_code = ble_bas_battery_level_update(&m_bas, battery_level);
     if ((err_code != NRF_SUCCESS) &&
@@ -132,6 +159,61 @@ static void battery_level_update(void)
     }
 }
 
+/**
+ * @brief ADC interrupt handler.
+ */
+void ADC_IRQHandler(void)
+{
+    nrf_adc_conversion_event_clean();
+
+    adc_sample = nrf_adc_result_get();
+    //battery_level_update();
+
+    // trigger next ADC conversion
+    nrf_adc_start();
+}
+
+/**
+ * @brief UART initialization.
+ */
+void uart_config(void)
+{
+    uint32_t                     err_code;
+    const app_uart_comm_params_t comm_params =
+    {
+        RX_PIN_NUMBER,
+        TX_PIN_NUMBER,
+        RTS_PIN_NUMBER,
+        CTS_PIN_NUMBER,
+        APP_UART_FLOW_CONTROL_DISABLED,
+        false,
+        UART_BAUDRATE_BAUDRATE_Baud38400
+    };
+
+    APP_UART_FIFO_INIT(&comm_params,
+                       UART_RX_BUF_SIZE,
+                       UART_TX_BUF_SIZE,
+                       uart_events_handler,
+                       APP_IRQ_PRIORITY_LOW,
+                       err_code);
+
+    APP_ERROR_CHECK(err_code);
+}
+
+/**
+ * @brief ADC initialization.
+ */
+void adc_config(void)
+{
+    const nrf_adc_config_t nrf_adc_config = NRF_ADC_CONFIG_DEFAULT;
+
+    // Initialize and configure ADC
+    nrf_adc_configure( (nrf_adc_config_t *)&nrf_adc_config);
+    nrf_adc_input_select(NRF_ADC_CONFIG_INPUT_5);
+    nrf_adc_int_enable(ADC_INTENSET_END_Enabled << ADC_INTENSET_END_Pos);
+    NVIC_SetPriority(ADC_IRQn, NRF_APP_PRIORITY_HIGH);
+    NVIC_EnableIRQ(ADC_IRQn);
+}
 
 /**@brief Function for handling the Battery measurement timer timeout.
  *
@@ -146,7 +228,7 @@ static void battery_level_meas_timeout_handler(void * p_context)
     battery_level_update();
 }
 
-/**@brief Function for the Timer initialization.
+/*@brief Function for the Timer initialization.
  *
  * @details Initializes the timer module. This creates and starts application timers.
  */
@@ -598,9 +680,17 @@ int main(void)
     services_init();
     sensor_simulator_init();
     conn_params_init();
+    adc_config();
+
+    uart_config();
+
+    printf("\n\rADC HAL simple example\r\n");
+
+    printf("Current sample value:\r\n");
 
     // Start execution.
     application_timers_start();
+    nrf_adc_start();
     err_code = ble_advertising_start(BLE_ADV_MODE_FAST);
     APP_ERROR_CHECK(err_code);
 

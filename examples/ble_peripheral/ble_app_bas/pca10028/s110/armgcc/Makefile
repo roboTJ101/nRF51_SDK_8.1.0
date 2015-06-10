@@ -47,6 +47,7 @@ C_SOURCE_FILES += \
 ../../../../../../components/libraries/sensorsim/sensorsim.c \
 ../../../../../../components/drivers_nrf/uart/app_uart_fifo.c \
 ../../../../../../components/drivers_nrf/hal/nrf_delay.c \
+../../../../../../components/drivers_nrf/hal/nrf_adc.c \
 ../../../../../../components/drivers_nrf/common/nrf_drv_common.c \
 ../../../../../../components/drivers_nrf/gpiote/nrf_drv_gpiote.c \
 ../../../../../../components/drivers_nrf/pstorage/pstorage.c \
