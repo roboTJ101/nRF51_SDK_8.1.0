@@ -93,9 +93,6 @@ volatile int32_t adc_sample = 0;
 static uint16_t                          m_conn_handle = BLE_CONN_HANDLE_INVALID;   /**< Handle of the current connection. */
 static ble_bas_t                         m_bas;                                     /**< Structure used to identify the battery service. */
 
-static sensorsim_cfg_t                   m_battery_sim_cfg;                         /**< Battery Level sensor simulator configuration. */
-static sensorsim_state_t                 m_battery_sim_state;                       /**< Battery Level sensor simulator state. */
-
 static app_timer_id_t                    m_battery_timer_id;                        /**< Battery timer. */
 
 static dm_application_instance_t         m_app_handle;                              /**< Application identifier allocated by device manager */
@@ -310,19 +307,6 @@ static void services_init(void)
 
     err_code = ble_bas_init(&m_bas, &bas_init);
     APP_ERROR_CHECK(err_code);
-}
-
-
-/**@brief Function for initializing the sensor simulators.
- */
-static void sensor_simulator_init(void)
-{
-    m_battery_sim_cfg.min          = MIN_BATTERY_LEVEL;
-    m_battery_sim_cfg.max          = MAX_BATTERY_LEVEL;
-    m_battery_sim_cfg.incr         = BATTERY_LEVEL_INCREMENT;
-    m_battery_sim_cfg.start_at_max = true;
-
-    sensorsim_init(&m_battery_sim_state, &m_battery_sim_cfg);
 }
 
 
@@ -683,7 +667,7 @@ int main(void)
     gap_params_init();
     advertising_init();
     services_init();
-    sensor_simulator_init();
+    //sensor_simulator_init();
     conn_params_init();
     adc_config();
 
