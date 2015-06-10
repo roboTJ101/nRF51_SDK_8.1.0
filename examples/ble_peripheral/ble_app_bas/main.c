@@ -50,8 +50,8 @@
 
 #define IS_SRVC_CHANGED_CHARACT_PRESENT  1                                          /**< Include or not the service_changed characteristic. if not enabled, the server's database cannot be changed for the lifetime of the device*/
 
-#define DEVICE_NAME                      "Nordic_HRM"                               /**< Name of device. Will be included in the advertising data. */
-#define MANUFACTURER_NAME                "NordicSemiconductor"                      /**< Manufacturer. Will be passed to Device Information Service. */
+#define DEVICE_NAME                      "BATT_LVL"                               /**< Name of device. Will be included in the advertising data. */
+#define MANUFACTURER_NAME                "DisneyResearch"                      /**< Manufacturer. Will be passed to Device Information Service. */
 #define APP_ADV_INTERVAL                 300                                        /**< The advertising interval (in units of 0.625 ms. This value corresponds to 25 ms). */
 #define APP_ADV_TIMEOUT_IN_SECONDS       180                                        /**< The advertising timeout in units of seconds. */
 
@@ -64,17 +64,17 @@
 #define MAX_BATTERY_LEVEL                100                                        /**< Maximum simulated battery level. */
 #define BATTERY_LEVEL_INCREMENT          1                                          /**< Increment between each simulated battery level measurement. */
 
-#define HEART_RATE_MEAS_INTERVAL         APP_TIMER_TICKS(1000, APP_TIMER_PRESCALER) /**< Heart rate measurement interval (ticks). */
-#define MIN_HEART_RATE                   140                                        /**< Minimum heart rate as returned by the simulated measurement function. */
-#define MAX_HEART_RATE                   300                                        /**< Maximum heart rate as returned by the simulated measurement function. */
-#define HEART_RATE_INCREMENT             10                                         /**< Value by which the heart rate is incremented/decremented for each call to the simulated measurement function. */
+//#define HEART_RATE_MEAS_INTERVAL         APP_TIMER_TICKS(1000, APP_TIMER_PRESCALER) /**< Heart rate measurement interval (ticks). */
+//#define MIN_HEART_RATE                   140                                        /**< Minimum heart rate as returned by the simulated measurement function. */
+//#define MAX_HEART_RATE                   300                                        /**< Maximum heart rate as returned by the simulated measurement function. */
+//#define HEART_RATE_INCREMENT             10                                         /**< Value by which the heart rate is incremented/decremented for each call to the simulated measurement function. */
 
 //#define RR_INTERVAL_INTERVAL             APP_TIMER_TICKS(300, APP_TIMER_PRESCALER)  /**< RR interval interval (ticks). */
 //#define MIN_RR_INTERVAL                  100                                        /**< Minimum RR interval as returned by the simulated measurement function. */
 //#define MAX_RR_INTERVAL                  500                                        /**< Maximum RR interval as returned by the simulated measurement function. */
 //#define RR_INTERVAL_INCREMENT            1                                          /**< Value by which the RR interval is incremented/decremented for each call to the simulated measurement function. */
 
-#define SENSOR_CONTACT_DETECTED_INTERVAL APP_TIMER_TICKS(5000, APP_TIMER_PRESCALER) /**< Sensor Contact Detected toggle interval (ticks). */
+//#define SENSOR_CONTACT_DETECTED_INTERVAL APP_TIMER_TICKS(5000, APP_TIMER_PRESCALER) /**< Sensor Contact Detected toggle interval (ticks). */
 
 #define MIN_CONN_INTERVAL                MSEC_TO_UNITS(400, UNIT_1_25_MS)           /**< Minimum acceptable connection interval (0.4 seconds). */
 #define MAX_CONN_INTERVAL                MSEC_TO_UNITS(650, UNIT_1_25_MS)           /**< Maximum acceptable connection interval (0.65 second). */
@@ -106,25 +106,25 @@ STATIC_ASSERT(IS_SRVC_CHANGED_CHARACT_PRESENT);                                 
 
 static uint16_t                          m_conn_handle = BLE_CONN_HANDLE_INVALID;   /**< Handle of the current connection. */
 static ble_bas_t                         m_bas;                                     /**< Structure used to identify the battery service. */
-static ble_hrs_t                         m_hrs;                                     /**< Structure used to identify the heart rate service. */
+//static ble_hrs_t                         m_hrs;                                     /**< Structure used to identify the heart rate service. */
 //static bool                              m_rr_interval_enabled = false;              /**< Flag for enabling and disabling the registration of new RR interval measurements (the purpose of disabling this is just to test sending HRM without RR interval data. */
 
 static sensorsim_cfg_t                   m_battery_sim_cfg;                         /**< Battery Level sensor simulator configuration. */
 static sensorsim_state_t                 m_battery_sim_state;                       /**< Battery Level sensor simulator state. */
-static sensorsim_cfg_t                   m_heart_rate_sim_cfg;                      /**< Heart Rate sensor simulator configuration. */
-static sensorsim_state_t                 m_heart_rate_sim_state;                    /**< Heart Rate sensor simulator state. */
+//static sensorsim_cfg_t                   m_heart_rate_sim_cfg;                      /**< Heart Rate sensor simulator configuration. */
+//static sensorsim_state_t                 m_heart_rate_sim_state;                    /**< Heart Rate sensor simulator state. */
 //static sensorsim_cfg_t                   m_rr_interval_sim_cfg;                     /**< RR Interval sensor simulator configuration. */
 //static sensorsim_state_t                 m_rr_interval_sim_state;                   /**< RR Interval sensor simulator state. */
 
 static app_timer_id_t                    m_battery_timer_id;                        /**< Battery timer. */
-static app_timer_id_t                    m_heart_rate_timer_id;                     /**< Heart rate measurement timer. */
+//static app_timer_id_t                    m_heart_rate_timer_id;                     /**< Heart rate measurement timer. */
 //static app_timer_id_t                    m_rr_interval_timer_id;                    /**< RR interval timer. */
 //static app_timer_id_t                    m_sensor_contact_timer_id;                 /**< Sensor contact detected timer. */
 
 static dm_application_instance_t         m_app_handle;                              /**< Application identifier allocated by device manager */
 
-static ble_uuid_t m_adv_uuids[] = {{BLE_UUID_HEART_RATE_SERVICE,         BLE_UUID_TYPE_BLE},
-                                   {BLE_UUID_BATTERY_SERVICE,            BLE_UUID_TYPE_BLE}/*,
+static ble_uuid_t m_adv_uuids[] = {/*{BLE_UUID_HEART_RATE_SERVICE,         BLE_UUID_TYPE_BLE},
+                                   */{BLE_UUID_BATTERY_SERVICE,            BLE_UUID_TYPE_BLE}/*,
                                    {BLE_UUID_DEVICE_INFORMATION_SERVICE, BLE_UUID_TYPE_BLE}*/}; /**< Universally unique service identifiers. */
 #ifdef BLE_DFU_APP_SUPPORT    
 static ble_dfu_t                         m_dfus;                                    /**< Structure used to identify the DFU service. */
@@ -192,32 +192,32 @@ static void battery_level_meas_timeout_handler(void * p_context)
  * @param[in] p_context  Pointer used for passing some arbitrary information (context) from the
  *                       app_start_timer() call to the timeout handler.
  */
-static void heart_rate_meas_timeout_handler(void * p_context)
-{
-    static uint32_t cnt = 0;
-    uint32_t        err_code;
-    uint16_t        heart_rate;
+/*static void heart_rate_meas_timeout_handler(void * p_context)*/
+/*{*/
+/*    static uint32_t cnt = 0;*/
+/*    uint32_t        err_code;*/
+/*    uint16_t        heart_rate;*/
 
-    UNUSED_PARAMETER(p_context);
+/*    UNUSED_PARAMETER(p_context);*/
 
-    heart_rate = (uint16_t)sensorsim_measure(&m_heart_rate_sim_state, &m_heart_rate_sim_cfg);
+/*    heart_rate = (uint16_t)sensorsim_measure(&m_heart_rate_sim_state, &m_heart_rate_sim_cfg);*/
 
-    cnt++;
-    err_code = ble_hrs_heart_rate_measurement_send(&m_hrs, heart_rate);
-    if ((err_code != NRF_SUCCESS) &&
-        (err_code != NRF_ERROR_INVALID_STATE) &&
-        (err_code != BLE_ERROR_NO_TX_BUFFERS) &&
-        (err_code != BLE_ERROR_GATTS_SYS_ATTR_MISSING)
-        )
-    {
-        APP_ERROR_HANDLER(err_code);
-    }
+/*    cnt++;*/
+/*    err_code = ble_hrs_heart_rate_measurement_send(&m_hrs, heart_rate);*/
+/*    if ((err_code != NRF_SUCCESS) &&*/
+/*        (err_code != NRF_ERROR_INVALID_STATE) &&*/
+/*        (err_code != BLE_ERROR_NO_TX_BUFFERS) &&*/
+/*        (err_code != BLE_ERROR_GATTS_SYS_ATTR_MISSING)*/
+/*        )*/
+/*    {*/
+/*        APP_ERROR_HANDLER(err_code);*/
+/*    }*/
 
-    // Disable RR Interval recording every third heart rate measurement.
-    // NOTE: An application will normally not do this. It is done here just for testing generation
-    //       of messages without RR Interval measurements.
-    //m_rr_interval_enabled = ((cnt % 3) != 0);
-}
+/*    // Disable RR Interval recording every third heart rate measurement.*/
+/*    // NOTE: An application will normally not do this. It is done here just for testing generation*/
+/*    //       of messages without RR Interval measurements.*/
+/*    //m_rr_interval_enabled = ((cnt % 3) != 0);*/
+/*}*/
 
 
 /**@brief Function for handling the RR interval timer timeout.
@@ -277,10 +277,10 @@ static void timers_init(void)
                                 battery_level_meas_timeout_handler);
     APP_ERROR_CHECK(err_code);
 
-    err_code = app_timer_create(&m_heart_rate_timer_id,
-                                APP_TIMER_MODE_REPEATED,
-                                heart_rate_meas_timeout_handler);
-    APP_ERROR_CHECK(err_code);
+/*    err_code = app_timer_create(&m_heart_rate_timer_id,*/
+/*                                APP_TIMER_MODE_REPEATED,*/
+/*                                heart_rate_meas_timeout_handler);*/
+/*    APP_ERROR_CHECK(err_code);*/
 
 /*    err_code = app_timer_create(&m_rr_interval_timer_id,*/
 /*                                APP_TIMER_MODE_REPEATED,*/
@@ -433,7 +433,7 @@ static void reset_prepare(void)
 static void services_init(void)
 {
     uint32_t       err_code;
-    ble_hrs_init_t hrs_init;
+/*    ble_hrs_init_t hrs_init;*/
     ble_bas_init_t bas_init;
 /*    ble_dis_init_t dis_init;*/
 /*    uint8_t        body_sensor_location;*/
@@ -441,22 +441,22 @@ static void services_init(void)
     // Initialize Heart Rate Service.
 /*    body_sensor_location = BLE_HRS_BODY_SENSOR_LOCATION_FINGER;*/
 
-    memset(&hrs_init, 0, sizeof(hrs_init));
+/*    memset(&hrs_init, 0, sizeof(hrs_init));*/
 
-    hrs_init.evt_handler                 = NULL;
-    hrs_init.is_sensor_contact_supported = false;
+/*    hrs_init.evt_handler                 = NULL;*/
+/*    hrs_init.is_sensor_contact_supported = false;*/
 /*    hrs_init.p_body_sensor_location      = &body_sensor_location;*/
 
-    // Here the sec level for the Heart Rate Service can be changed/increased.
-    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&hrs_init.hrs_hrm_attr_md.cccd_write_perm);
-    BLE_GAP_CONN_SEC_MODE_SET_NO_ACCESS(&hrs_init.hrs_hrm_attr_md.read_perm);
-    BLE_GAP_CONN_SEC_MODE_SET_NO_ACCESS(&hrs_init.hrs_hrm_attr_md.write_perm);
+/*    // Here the sec level for the Heart Rate Service can be changed/increased.*/
+/*    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&hrs_init.hrs_hrm_attr_md.cccd_write_perm);*/
+/*    BLE_GAP_CONN_SEC_MODE_SET_NO_ACCESS(&hrs_init.hrs_hrm_attr_md.read_perm);*/
+/*    BLE_GAP_CONN_SEC_MODE_SET_NO_ACCESS(&hrs_init.hrs_hrm_attr_md.write_perm);*/
 
-    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&hrs_init.hrs_bsl_attr_md.read_perm);
-    BLE_GAP_CONN_SEC_MODE_SET_NO_ACCESS(&hrs_init.hrs_bsl_attr_md.write_perm);
+/*    BLE_GAP_CONN_SEC_MODE_SET_OPEN(&hrs_init.hrs_bsl_attr_md.read_perm);*/
+/*    BLE_GAP_CONN_SEC_MODE_SET_NO_ACCESS(&hrs_init.hrs_bsl_attr_md.write_perm);*/
 
-    err_code = ble_hrs_init(&m_hrs, &hrs_init);
-    APP_ERROR_CHECK(err_code);
+/*    err_code = ble_hrs_init(&m_hrs, &hrs_init);*/
+/*    APP_ERROR_CHECK(err_code);*/
 
     // Initialize Battery Service.
     memset(&bas_init, 0, sizeof(bas_init));
@@ -520,12 +520,12 @@ static void sensor_simulator_init(void)
 
     sensorsim_init(&m_battery_sim_state, &m_battery_sim_cfg);
 
-    m_heart_rate_sim_cfg.min          = MIN_HEART_RATE;
-    m_heart_rate_sim_cfg.max          = MAX_HEART_RATE;
-    m_heart_rate_sim_cfg.incr         = HEART_RATE_INCREMENT;
-    m_heart_rate_sim_cfg.start_at_max = false;
+/*    m_heart_rate_sim_cfg.min          = MIN_HEART_RATE;*/
+/*    m_heart_rate_sim_cfg.max          = MAX_HEART_RATE;*/
+/*    m_heart_rate_sim_cfg.incr         = HEART_RATE_INCREMENT;*/
+/*    m_heart_rate_sim_cfg.start_at_max = false;*/
 
-    sensorsim_init(&m_heart_rate_sim_state, &m_heart_rate_sim_cfg);
+/*    sensorsim_init(&m_heart_rate_sim_state, &m_heart_rate_sim_cfg);*/
 
 /*    m_rr_interval_sim_cfg.min          = MIN_RR_INTERVAL;*/
 /*    m_rr_interval_sim_cfg.max          = MAX_RR_INTERVAL;*/
@@ -546,8 +546,8 @@ static void application_timers_start(void)
     err_code = app_timer_start(m_battery_timer_id, BATTERY_LEVEL_MEAS_INTERVAL, NULL);
     APP_ERROR_CHECK(err_code);
 
-    err_code = app_timer_start(m_heart_rate_timer_id, HEART_RATE_MEAS_INTERVAL, NULL);
-    APP_ERROR_CHECK(err_code);
+/*    err_code = app_timer_start(m_heart_rate_timer_id, HEART_RATE_MEAS_INTERVAL, NULL);*/
+/*    APP_ERROR_CHECK(err_code);*/
 
 /*    err_code = app_timer_start(m_rr_interval_timer_id, RR_INTERVAL_INTERVAL, NULL);*/
 /*    APP_ERROR_CHECK(err_code);*/
@@ -602,7 +602,7 @@ static void conn_params_init(void)
     cp_init.first_conn_params_update_delay = FIRST_CONN_PARAMS_UPDATE_DELAY;
     cp_init.next_conn_params_update_delay  = NEXT_CONN_PARAMS_UPDATE_DELAY;
     cp_init.max_conn_params_update_count   = MAX_CONN_PARAMS_UPDATE_COUNT;
-    cp_init.start_on_notify_cccd_handle    = m_hrs.hrm_handles.cccd_handle;
+    //cp_init.start_on_notify_cccd_handle    = m_bas.hrm_handles.cccd_handle;
     cp_init.disconnect_on_fail             = false;
     cp_init.evt_handler                    = on_conn_params_evt;
     cp_init.error_handler                  = conn_params_error_handler;
@@ -693,7 +693,7 @@ static void on_ble_evt(ble_evt_t * p_ble_evt)
 static void ble_evt_dispatch(ble_evt_t * p_ble_evt)
 {
     dm_ble_evt_handler(p_ble_evt);
-    ble_hrs_on_ble_evt(&m_hrs, p_ble_evt);
+    //ble_hrs_on_ble_evt(&m_hrs, p_ble_evt);
     ble_bas_on_ble_evt(&m_bas, p_ble_evt);
     ble_conn_params_on_ble_evt(p_ble_evt);
     bsp_btn_ble_on_ble_evt(p_ble_evt);
