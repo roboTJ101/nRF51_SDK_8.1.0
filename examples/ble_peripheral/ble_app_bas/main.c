@@ -67,7 +67,7 @@ volatile int32_t adc_sample = 0;
 #define APP_TIMER_MAX_TIMERS             (6+BSP_APP_TIMERS_NUMBER)                  /**< Maximum number of simultaneously created timers. */
 #define APP_TIMER_OP_QUEUE_SIZE          4                                          /**< Size of timer operation queues. */
 
-#define BATTERY_LEVEL_MEAS_INTERVAL      APP_TIMER_TICKS(40, APP_TIMER_PRESCALER) /**< Battery level measurement interval (ticks, 2000 = 1Hz). */
+#define BATTERY_LEVEL_MEAS_INTERVAL      APP_TIMER_TICKS(10, APP_TIMER_PRESCALER) /**< Battery level measurement interval (ticks, 2000 = 1Hz). */
 #define MIN_BATTERY_LEVEL                0                                         /**< Minimum simulated battery level. */
 #define MAX_BATTERY_LEVEL                100                                        /**< Maximum simulated battery level. */
 #define BATTERY_LEVEL_INCREMENT          1                                          /**< Increment between each simulated battery level measurement. */
@@ -144,9 +144,9 @@ static void battery_level_update(void)
     uint8_t  battery_level;
 
     //battery_level = (uint8_t)sensorsim_measure(&m_battery_sim_state, &m_battery_sim_cfg);
-    printf("\n\rBegin conversion: ADC value = %d \r\n", (int)adc_sample);
+    //printf("\n\rBegin conversion: ADC value = %d \r\n", (int)adc_sample);
     battery_level = (uint8_t)((float)adc_sample/9);
-    printf("\n\rConversion complete: batt level = %d \r\n", (int)battery_level);
+    //printf("\n\rConversion complete: batt level = %d \r\n", (int)battery_level);
 
     err_code = ble_bas_battery_level_update(&m_bas, battery_level);
     if ((err_code != NRF_SUCCESS) &&
@@ -663,9 +663,9 @@ int main(void)
     uint32_t err_code;
     bool erase_bonds;
 
-    uart_config();
+    //uart_config();
 
-    printf("\n\rBDC HAL simple example\r\n"); //GETS HERE, Dies after first letter!
+    //printf("\n\rBDC HAL simple example\r\n"); //GETS HERE, Dies after first letter!
 
     // Initialize.
     timers_init();
@@ -682,7 +682,7 @@ int main(void)
 
     //printf("\n\rBDC HAL simple example\r\n"); //GETS HERE, Dies after first letter!
 
-    printf("Current sample value:\r\n");
+    //printf("Current sample value:\r\n");
 
     adc_config();
 
