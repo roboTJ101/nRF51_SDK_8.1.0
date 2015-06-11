@@ -35,12 +35,17 @@
 #include "app_timer.h"
 #include "bsp.h"
 #include "bsp_btn_ble.h"
+#include "app_pwm.h"
+
+APP_PWM_INSTANCE(PWM1,2); // Create the PWM1 instance using TIMER2
+
 
 #define UART_TX_BUF_SIZE           256                                /**< UART TX buffer size. */
 #define UART_RX_BUF_SIZE           1                                  /**< UART RX buffer size. */
 
 #define STRING_BUFFER_LEN          50
 #define BOND_DELETE_ALL_BUTTON_ID  0                                  /**< Button used for deleting all bonded centrals during startup. */
+
 
 #define APP_TIMER_PRESCALER        0                                  /**< Value of the RTC1 PRESCALER register. */
 #define APP_TIMER_MAX_TIMERS       (2+BSP_APP_TIMERS_NUMBER)          /**< Maximum number of simultaneously created timers. */
@@ -59,7 +64,7 @@
 #define SCAN_WINDOW                0x0050                             /**< Determines scan window in units of 0.625 millisecond. */
 
 #define MIN_CONNECTION_INTERVAL    MSEC_TO_UNITS(7.5, UNIT_1_25_MS)   /**< Determines minimum connection interval in millisecond. */
-#define MAX_CONNECTION_INTERVAL    MSEC_TO_UNITS(30, UNIT_1_25_MS)    /**< Determines maximum connection interval in millisecond. */
+#define MAX_CONNECTION_INTERVAL    MSEC_TO_UNITS(20, UNIT_1_25_MS)    /**< Determines maximum connection interval in millisecond. */
 #define SLAVE_LATENCY              0                                  /**< Determines slave latency in counts of connection events. */
 #define SUPERVISION_TIMEOUT        MSEC_TO_UNITS(4000, UNIT_10_MS)    /**< Determines supervision time-out in units of 10 millisecond. */
 
@@ -103,6 +108,12 @@ static volatile bool                m_whitelist_temporarily_disabled = false; /*
 
 static bool                         m_memory_access_in_progress = false; /**< Flag to keep track of ongoing operations on persistent memory. */
 
+static volatile bool ready_flag; // A flag indicating PWM status
+
+void pwm_ready_callback(uint32_t pwm_id) {
+    ready_flag = true;
+};
+
 /**
  * @brief Connection parameters requested for connection.
  */
@@ -145,6 +156,21 @@ void uart_error_handle(app_uart_evt_t * p_event)
     {
         APP_ERROR_HANDLER(p_event->data.error_code);
     }
+}
+
+/**@brief Function for initializing the PWM output 
+*/
+static void pwm_init(void) {
+    
+    ret_code_t err_code;
+    /* 1-channel PWM, 200Hz, output to pin 15 */
+    app_pwm_config_t pwm1_cfg = APP_PWM_DEFAULT_CONFIG_1CH(5000L, BSP_LED_1);
+    err_code = app_pwm_init(&PWM1,&pwm1_cfg,pwm_ready_callback);
+    APP_ERROR_CHECK(err_code);
+    /* Keep trying to set duty cycle until PWM ready */
+    while(app_pwm_channel_duty_set(&PWM1, 0, 100) == NRF_ERROR_BUSY);
+    app_pwm_enable(&PWM1);
+
 }
 
 /**@brief Callback handling device manager events.
@@ -650,7 +676,6 @@ void bsp_event_handler(bsp_event_t event)
 static void bas_c_evt_handler(ble_bas_c_t * p_bas_c, ble_bas_c_evt_t * p_bas_c_evt)
 {
     uint32_t err_code;
-    uint8_t batteryLevel;
 
     switch (p_bas_c_evt->evt_type)
     {
@@ -674,9 +699,12 @@ static void bas_c_evt_handler(ble_bas_c_t * p_bas_c, ble_bas_c_evt_t * p_bas_c_e
         {
             APPL_LOG("[APPL]: Battery Level received %d %%\r\n", p_bas_c_evt->params.battery_level);
 	    
-	    batteryLevel = p_bas_c_evt->params.battery_level;
+	    uint8_t batteryLevel = p_bas_c_evt->params.battery_level;
 	    // Normalize the battery level
-	    if(batteryLevel > 100) batteryLevel = 100;
+	    //if(batteryLevel > 100) batteryLevel = 100;
+	    batteryLevel = batteryLevel < 100 ? batteryLevel : 100;
+            printf("batteryLevel = %d %%\r\n", batteryLevel);
+	    while(app_pwm_channel_duty_set(&PWM1, 0, batteryLevel) == NRF_ERROR_BUSY)
 
             printf("Battery = %d %%\r\n", batteryLevel);
             break;
@@ -871,6 +899,7 @@ int main(void)
     db_discovery_init();
     //hrs_c_init();
     bas_c_init();
+    pwm_init();
 
     // Start scanning for peripherals and initiate connection
     // with devices that advertise Heart Rate UUID.
