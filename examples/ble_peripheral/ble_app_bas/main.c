@@ -67,7 +67,7 @@ volatile int32_t adc_sample = 0;
 #define APP_TIMER_MAX_TIMERS             (6+BSP_APP_TIMERS_NUMBER)                  /**< Maximum number of simultaneously created timers. */
 #define APP_TIMER_OP_QUEUE_SIZE          4                                          /**< Size of timer operation queues. */
 
-#define BATTERY_LEVEL_MEAS_INTERVAL      APP_TIMER_TICKS(2000, APP_TIMER_PRESCALER) /**< Battery level measurement interval (ticks). */
+#define BATTERY_LEVEL_MEAS_INTERVAL      APP_TIMER_TICKS(40, APP_TIMER_PRESCALER) /**< Battery level measurement interval (ticks, 2000 = 1Hz). */
 #define MIN_BATTERY_LEVEL                0                                         /**< Minimum simulated battery level. */
 #define MAX_BATTERY_LEVEL                100                                        /**< Maximum simulated battery level. */
 #define BATTERY_LEVEL_INCREMENT          1                                          /**< Increment between each simulated battery level measurement. */
@@ -128,8 +128,8 @@ void uart_events_handler(app_uart_evt_t * p_event)
         case APP_UART_FIFO_ERROR:          APP_ERROR_HANDLER(p_event->data.error_code);
             break;
 
-        case APP_UART_TX_EMPTY:            printf("%d\r\n", (int)adc_sample); // out ADC result
-            break;
+        //case APP_UART_TX_EMPTY:            printf("%d\r\n", (int)adc_sample); // out ADC result
+            //break;
 
         default: break;
     }
@@ -164,11 +164,14 @@ static void battery_level_update(void)
  */
 void ADC_IRQHandler(void)
 {
+    //nrf_adc_int_disable(ADC_INTENSET_END_Enabled << ADC_INTENSET_END_Pos);
+
     nrf_adc_conversion_event_clean();
 
     adc_sample = nrf_adc_result_get();
     //battery_level_update();
 
+   // nrf_adc_int_enable(ADC_INTENSET_END_Enabled << ADC_INTENSET_END_Pos);
     // trigger next ADC conversion
     nrf_adc_start();
 }
@@ -213,6 +216,7 @@ void adc_config(void)
     nrf_adc_int_enable(ADC_INTENSET_END_Enabled << ADC_INTENSET_END_Pos);
     NVIC_SetPriority(ADC_IRQn, NRF_APP_PRIORITY_HIGH);
     NVIC_EnableIRQ(ADC_IRQn);
+    printf("\n\rADC Configured Corectly\r\n");
 }
 
 /**@brief Function for handling the Battery measurement timer timeout.
@@ -659,6 +663,10 @@ int main(void)
     uint32_t err_code;
     bool erase_bonds;
 
+    uart_config();
+
+    printf("\n\rBDC HAL simple example\r\n"); //GETS HERE, Dies after first letter!
+
     // Initialize.
     timers_init();
     buttons_leds_init(&erase_bonds);
@@ -669,13 +677,14 @@ int main(void)
     services_init();
     //sensor_simulator_init();
     conn_params_init();
-    adc_config();
 
-    uart_config();
+    //uart_config();
 
-    printf("\n\rADC HAL simple example\r\n");
+    //printf("\n\rBDC HAL simple example\r\n"); //GETS HERE, Dies after first letter!
 
     printf("Current sample value:\r\n");
+
+    adc_config();
 
     // Start execution.
     application_timers_start();
