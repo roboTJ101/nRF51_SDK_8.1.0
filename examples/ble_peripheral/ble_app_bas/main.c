@@ -145,7 +145,7 @@ static void battery_level_update(void)
 
     //battery_level = (uint8_t)sensorsim_measure(&m_battery_sim_state, &m_battery_sim_cfg);
     //printf("\n\rBegin conversion: ADC value = %d \r\n", (int)adc_sample);
-    battery_level = (uint8_t)((float)adc_sample/9);
+    battery_level = (uint8_t)((float)adc_sample/9.04);
     //printf("\n\rConversion complete: batt level = %d \r\n", (int)battery_level);
 
     err_code = ble_bas_battery_level_update(&m_bas, battery_level);
@@ -212,11 +212,11 @@ void adc_config(void)
 
     // Initialize and configure ADC
     nrf_adc_configure( (nrf_adc_config_t *)&nrf_adc_config);
-    nrf_adc_input_select(NRF_ADC_CONFIG_INPUT_5);
+    nrf_adc_input_select(NRF_ADC_CONFIG_INPUT_7);
     nrf_adc_int_enable(ADC_INTENSET_END_Enabled << ADC_INTENSET_END_Pos);
     NVIC_SetPriority(ADC_IRQn, NRF_APP_PRIORITY_HIGH);
     NVIC_EnableIRQ(ADC_IRQn);
-    printf("\n\rADC Configured Corectly\r\n");
+    //printf("\n\rADC Configured Corectly\r\n");
 }
 
 /**@brief Function for handling the Battery measurement timer timeout.
