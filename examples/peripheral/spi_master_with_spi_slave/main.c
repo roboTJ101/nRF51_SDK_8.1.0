@@ -37,9 +37,9 @@
 #define APP_TIMER_MAX_TIMERS     BSP_APP_TIMERS_NUMBER  /**< Maximum number of simultaneously created timers. */
 #define APP_TIMER_OP_QUEUE_SIZE  2                      /**< Size of timer operation queues. */
 
-#define DELAY_MS                 1000                /**< Timer Delay in milli-seconds. */
+#define DELAY_MS                 500                /**< Timer Delay in milli-seconds. */
 
-#define TX_RX_BUF_LENGTH         16u                 /**< SPI transaction buffer length. */
+#define TX_RX_BUF_LENGTH         2                 /**< SPI transaction buffer length. */
 
 #if defined(SPI_MASTER_0_ENABLE)
     #define SPI_MASTER_HW SPI_MASTER_0
@@ -113,15 +113,15 @@ static uint32_t spi_master_init(void)
 static void spi_master_event_handler(spi_master_evt_t spi_master_evt)
 {
     uint32_t err_code = NRF_SUCCESS;
-    bool result = false;
+    //bool result = false;
 
     switch (spi_master_evt.evt_type)
     {
         case SPI_MASTER_EVT_TRANSFER_COMPLETED:
 
             // Check if data are vaild.
-            result = buf_check(m_rx_data, spi_master_evt.data_count);
-            APP_ERROR_CHECK_BOOL(result);
+            //result = buf_check(m_rx_data, spi_master_evt.data_count);
+            //APP_ERROR_CHECK_BOOL(result);
 
             err_code = bsp_indication_set(BSP_INDICATE_RCV_OK);
             APP_ERROR_CHECK(err_code);
@@ -154,7 +154,7 @@ static void init_buffers(uint8_t * const p_tx_data,
 
     for (i = 0; i < len; i++)
     {
-        p_tx_data[i] = (uint8_t)('A' + i);
+        p_tx_data[i] = '+'; // + = 0b00101001 therfore '++' = config + 2859
         p_rx_data[i] = 0;
     }
 }
