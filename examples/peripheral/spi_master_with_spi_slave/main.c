@@ -86,7 +86,18 @@ static __INLINE bool buf_check(uint8_t * p_buf, uint16_t len)
  */
 static uint32_t spi_master_init(void)
 {
-    spi_master_config_t spi_config = SPI_MASTER_INIT_DEFAULT;
+    spi_master_config_t spi_config ={                                                                           \
+    (0x00200000UL), /**< Serial clock frequency <125 Kbps. Found in nrf51_bitfields.h. */      \
+    SPI_PIN_DISCONNECTED,       /**< SCK pin DISCONNECTED. */               \
+    SPI_PIN_DISCONNECTED,       /**< MISO pin DISCONNECTED. */              \
+    SPI_PIN_DISCONNECTED,       /**< MOSI pin DISCONNECTED. */              \
+    SPI_PIN_DISCONNECTED,       /**< Slave select pin DISCONNECTED. */      \
+    APP_IRQ_PRIORITY_LOW,       /**< Interrupt priority LOW. */             \
+    SPI_CONFIG_ORDER_MsbFirst,  /**< Bits order MSB. */                     \
+    SPI_CONFIG_CPOL_ActiveHigh, /**< Serial clock polarity ACTIVEHIGH. */   \
+    SPI_CONFIG_CPHA_Leading,    /**< Serial clock phase LEADING. */         \
+    0                           /**< Don't disable all IRQs. */             \
+};/*SPI_MASTER_INIT_DEFAULT;*/
     
     #if defined(SPI_MASTER_0_ENABLE)
     spi_config.SPI_Pin_SCK  = SPIM0_SCK_PIN;
@@ -154,7 +165,8 @@ static void init_buffers(uint8_t * const p_tx_data,
 
     for (i = 0; i < len; i++)
     {
-        p_tx_data[i] = '+'; // + = 0b00101001 therfore '++' = config + 2859
+        //p_tx_data[i] = '+'; // + = 0b00101011 therefore '++' = config + 2859
+	p_tx_data[i] = '8'; // + = 0b00111000 therefore '88' = config + 2104
         p_rx_data[i] = 0;
     }
 }
