@@ -37,7 +37,7 @@
 #define APP_TIMER_MAX_TIMERS     BSP_APP_TIMERS_NUMBER  /**< Maximum number of simultaneously created timers. */
 #define APP_TIMER_OP_QUEUE_SIZE  2                      /**< Size of timer operation queues. */
 
-#define DELAY_MS                 500                /**< Timer Delay in milli-seconds. */
+#define DELAY_MS                 30                /**< Timer Delay between transmissions (ms). */
 
 #define TX_RX_BUF_LENGTH         2                 /**< SPI transaction buffer length. */
 
@@ -54,6 +54,7 @@ static uint8_t m_tx_data[TX_RX_BUF_LENGTH] = {0}; /**< A buffer with data to tra
 static uint8_t m_rx_data[TX_RX_BUF_LENGTH] = {0}; /**< A buffer for incoming data. */
 
 static volatile bool m_transfer_completed = true; /**< A flag to inform about completed transfer. */
+volatile uint8_t counter = 0; // Counting variable
 
 
 /**@brief Function for checking if data coming from a SPI slave are valid.
@@ -161,8 +162,10 @@ static void init_buffers(uint8_t * const p_tx_data,
                          uint8_t * const p_rx_data,
                          const uint16_t  len)
 {
+    if(counter >= 30) counter = 0;
+    else counter++; 
     uint16_t i;
-    uint16_t data = 3500; // Value 0-4096
+    uint16_t data = (float)4096*((float)counter/30); // Value 0-4096
     uint16_t data2 = (0x3000 | (0x0FFF & data)) >> 8; // Add config bits
     uint8_t datarray[TX_RX_BUF_LENGTH] = {data2, data};
 
