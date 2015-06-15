@@ -272,7 +272,7 @@ LOAD /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/
 LOAD /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libnosys.a
 END GROUP
 
-.text           0x00000000     0x1cbc
+.text           0x00000000     0x1cc0
  *(.Vectors)
  .Vectors       0x00000000       0xc0 _build/gcc_startup_nrf51.o
                 0x00000000                __Vectors
@@ -364,55 +364,55 @@ END GROUP
                 0x00001940       0x60 _build/main.o
                 0x00001940                bsp_configuration
  .text.startup.main
-                0x000019a0       0xa0 _build/main.o
+                0x000019a0       0xa4 _build/main.o
                 0x000019a0                main
  .text.SystemInit
-                0x00001a40       0x8c _build/system_nrf51.o
-                0x00001a40                SystemInit
- .text          0x00001acc       0x54 _build/gcc_startup_nrf51.o
-                0x00001acc                Reset_Handler
-                0x00001b14                NMI_Handler
-                0x00001b16                HardFault_Handler
-                0x00001b18                SVC_Handler
-                0x00001b1a                PendSV_Handler
-                0x00001b1c                SysTick_Handler
-                0x00001b1e                TIMER2_IRQHandler
-                0x00001b1e                RTC0_IRQHandler
-                0x00001b1e                POWER_CLOCK_IRQHandler
-                0x00001b1e                RADIO_IRQHandler
-                0x00001b1e                LPCOMP_IRQHandler
-                0x00001b1e                SWI4_IRQHandler
-                0x00001b1e                TEMP_IRQHandler
-                0x00001b1e                QDEC_IRQHandler
-                0x00001b1e                UART0_IRQHandler
-                0x00001b1e                SWI5_IRQHandler
-                0x00001b1e                TIMER0_IRQHandler
-                0x00001b1e                TIMER1_IRQHandler
-                0x00001b1e                ECB_IRQHandler
-                0x00001b1e                Default_Handler
-                0x00001b1e                ADC_IRQHandler
-                0x00001b1e                SWI3_IRQHandler
-                0x00001b1e                CCM_AAR_IRQHandler
-                0x00001b1e                WDT_IRQHandler
-                0x00001b1e                SWI2_IRQHandler
-                0x00001b1e                RNG_IRQHandler
-                0x00001b1e                SPI1_TWI1_IRQHandler
-                0x00001b1e                SWI1_IRQHandler
- .text          0x00001b20       0x9c /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/libgcc.a(_udivsi3.o)
-                0x00001b20                __udivsi3
-                0x00001b20                __aeabi_uidiv
-                0x00001ba8                __aeabi_uidivmod
- .text          0x00001bbc        0x4 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/libgcc.a(_dvmd_tls.o)
-                0x00001bbc                __aeabi_ldiv0
-                0x00001bbc                __aeabi_idiv0
+                0x00001a44       0x8c _build/system_nrf51.o
+                0x00001a44                SystemInit
+ .text          0x00001ad0       0x54 _build/gcc_startup_nrf51.o
+                0x00001ad0                Reset_Handler
+                0x00001b18                NMI_Handler
+                0x00001b1a                HardFault_Handler
+                0x00001b1c                SVC_Handler
+                0x00001b1e                PendSV_Handler
+                0x00001b20                SysTick_Handler
+                0x00001b22                TIMER2_IRQHandler
+                0x00001b22                RTC0_IRQHandler
+                0x00001b22                POWER_CLOCK_IRQHandler
+                0x00001b22                RADIO_IRQHandler
+                0x00001b22                LPCOMP_IRQHandler
+                0x00001b22                SWI4_IRQHandler
+                0x00001b22                TEMP_IRQHandler
+                0x00001b22                QDEC_IRQHandler
+                0x00001b22                UART0_IRQHandler
+                0x00001b22                SWI5_IRQHandler
+                0x00001b22                TIMER0_IRQHandler
+                0x00001b22                TIMER1_IRQHandler
+                0x00001b22                ECB_IRQHandler
+                0x00001b22                Default_Handler
+                0x00001b22                ADC_IRQHandler
+                0x00001b22                SWI3_IRQHandler
+                0x00001b22                CCM_AAR_IRQHandler
+                0x00001b22                WDT_IRQHandler
+                0x00001b22                SWI2_IRQHandler
+                0x00001b22                RNG_IRQHandler
+                0x00001b22                SPI1_TWI1_IRQHandler
+                0x00001b22                SWI1_IRQHandler
+ .text          0x00001b24       0x9c /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/libgcc.a(_udivsi3.o)
+                0x00001b24                __udivsi3
+                0x00001b24                __aeabi_uidiv
+                0x00001bac                __aeabi_uidivmod
+ .text          0x00001bc0        0x4 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/libgcc.a(_dvmd_tls.o)
+                0x00001bc0                __aeabi_ldiv0
+                0x00001bc0                __aeabi_idiv0
  *(.init)
- .init          0x00001bc0        0x4 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crti.o
-                0x00001bc0                _init
- .init          0x00001bc4        0x8 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtn.o
+ .init          0x00001bc4        0x4 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crti.o
+                0x00001bc4                _init
+ .init          0x00001bc8        0x8 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtn.o
  *(.fini)
- .fini          0x00001bcc        0x4 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crti.o
-                0x00001bcc                _fini
- .fini          0x00001bd0        0x8 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtn.o
+ .fini          0x00001bd0        0x4 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crti.o
+                0x00001bd0                _fini
+ .fini          0x00001bd4        0x8 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtn.o
  *crtbegin.o(.ctors)
  *crtbegin?.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
@@ -425,52 +425,52 @@ END GROUP
  *(.dtors)
  *(.rodata*)
  .rodata.str1.1
-                0x00001bd8        0x2 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-impure.o)
- *fill*         0x00001bda        0x2 
+                0x00001bdc        0x2 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-impure.o)
+ *fill*         0x00001bde        0x2 
  .rodata._global_impure_ptr
-                0x00001bdc        0x4 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-impure.o)
-                0x00001bdc                _global_impure_ptr
+                0x00001be0        0x4 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libc_s.a(lib_a-impure.o)
+                0x00001be0                _global_impure_ptr
  .rodata.leds_timer_handler
-                0x00001be0       0x60 _build/bsp.o
+                0x00001be4       0x60 _build/bsp.o
  .rodata.bsp_indication_set
-                0x00001c40       0x60 _build/bsp.o
- .rodata        0x00001ca0       0x1c _build/main.o
+                0x00001c44       0x60 _build/bsp.o
+ .rodata        0x00001ca4       0x1c _build/main.o
  *(.eh_frame*)
-                0x00001cbc                . = ALIGN (0x4)
+                0x00001cc0                . = ALIGN (0x4)
 
-.glue_7         0x00001cbc        0x0
+.glue_7         0x00001cc0        0x0
  .glue_7        0x00000000        0x0 linker stubs
 
-.glue_7t        0x00001cbc        0x0
+.glue_7t        0x00001cc0        0x0
  .glue_7t       0x00000000        0x0 linker stubs
 
-.vfp11_veneer   0x00001cbc        0x0
+.vfp11_veneer   0x00001cc0        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x00001cbc        0x0
+.v4_bx          0x00001cc0        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x00001cbc        0x0
+.iplt           0x00001cc0        0x0
  .iplt          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtbegin.o
 
-.ARM.extab      0x00001cbc        0x0
+.ARM.extab      0x00001cc0        0x0
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00001cbc                . = ALIGN (0x4)
-                0x00001cbc                __exidx_start = .
+                0x00001cc0                . = ALIGN (0x4)
+                0x00001cc0                __exidx_start = .
 
-.ARM.exidx      0x00001cbc        0x8
+.ARM.exidx      0x00001cc0        0x8
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
- .ARM.exidx     0x00001cbc        0x8 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/crt0.o
- .ARM.exidx     0x00001cc4        0x0 _build/gcc_startup_nrf51.o
+ .ARM.exidx     0x00001cc0        0x8 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/crt0.o
+ .ARM.exidx     0x00001cc8        0x0 _build/gcc_startup_nrf51.o
                                   0x8 (size before relaxing)
-                0x00001cc4                . = ALIGN (0x4)
-                0x00001cc4                __exidx_end = .
-                0x00001cc4                __etext = .
+                0x00001cc8                . = ALIGN (0x4)
+                0x00001cc8                __exidx_end = .
+                0x00001cc8                __etext = .
 
-.rel.dyn        0x00001cc4        0x0
+.rel.dyn        0x00001cc8        0x0
  .rel.iplt      0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtbegin.o
 
-.data           0x20000000       0x64 load address 0x00001cc4
+.data           0x20000000       0x64 load address 0x00001cc8
                 0x20000000                __data_start__ = .
  *(vtable)
  *(.data*)
@@ -497,10 +497,10 @@ END GROUP
                 0x20000064                . = ALIGN (0x4)
                 0x20000064                __data_end__ = .
 
-.igot.plt       0x20000064        0x0 load address 0x00001d28
+.igot.plt       0x20000064        0x0 load address 0x00001d2c
  .igot.plt      0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtbegin.o
 
-.bss            0x20000064      0x24c load address 0x00001d28
+.bss            0x20000064      0x24c load address 0x00001d2c
                 0x20000064                . = ALIGN (0x4)
                 0x20000064                __bss_start__ = .
  *(.bss*)
@@ -547,12 +547,12 @@ END GROUP
  *fill*         0x20000119        0x3 
  .bss.m_leds_timer_id
                 0x2000011c        0x4 _build/bsp.o
+ .bss.APP_TIMER_BUF.6344
+                0x20000120      0x188 _build/main.o
  .bss.m_rx_data
-                0x20000120        0x4 _build/main.o
+                0x200002a8        0x4 _build/main.o
  .bss.m_tx_data
-                0x20000124        0x4 _build/main.o
- .bss.APP_TIMER_BUF.6341
-                0x20000128      0x188 _build/main.o
+                0x200002ac        0x4 _build/main.o
  *(COMMON)
                 0x200002b0                . = ALIGN (0x4)
                 0x200002b0                __bss_end__ = .

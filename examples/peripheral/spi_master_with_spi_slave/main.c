@@ -87,7 +87,7 @@ static __INLINE bool buf_check(uint8_t * p_buf, uint16_t len)
 static uint32_t spi_master_init(void)
 {
     spi_master_config_t spi_config ={                                                                           \
-    (0x00200000UL), /**< Serial clock frequency <125 Kbps. Found in nrf51_bitfields.h. */      \
+    SPI_FREQUENCY_FREQUENCY_M1, /**< Serial clock frequency 1 Mbps. Found in nrf51_bitfields.h. */      \
     SPI_PIN_DISCONNECTED,       /**< SCK pin DISCONNECTED. */               \
     SPI_PIN_DISCONNECTED,       /**< MISO pin DISCONNECTED. */              \
     SPI_PIN_DISCONNECTED,       /**< MOSI pin DISCONNECTED. */              \
@@ -162,11 +162,14 @@ static void init_buffers(uint8_t * const p_tx_data,
                          const uint16_t  len)
 {
     uint16_t i;
+    uint16_t data = 3500; // Value 0-4096
+    uint16_t data2 = (0x3000 | (0x0FFF & data)) >> 8; // Add config bits
+    uint8_t datarray[TX_RX_BUF_LENGTH] = {data2, data};
 
     for (i = 0; i < len; i++)
     {
-        //p_tx_data[i] = '+'; // + = 0b00101011 therefore '++' = config + 2859
-	p_tx_data[i] = '8'; // + = 0b00111000 therefore '88' = config + 2104
+
+	p_tx_data[i] = datarray[i];
         p_rx_data[i] = 0;
     }
 }
