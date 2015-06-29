@@ -11,7 +11,7 @@
  */
 
 /**@file
- * @defgroup spi_master_example_with_slave_main main.c
+ * @defgroup spi_sine main.c
  * @{
  * @ingroup spi_master_example
  *
@@ -20,6 +20,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <math.h>
 #include "app_error.h"
 #include "app_util_platform.h"
 #include "nrf_delay.h"
@@ -37,7 +38,7 @@
 #define APP_TIMER_MAX_TIMERS     BSP_APP_TIMERS_NUMBER  /**< Maximum number of simultaneously created timers. */
 #define APP_TIMER_OP_QUEUE_SIZE  2                      /**< Size of timer operation queues. */
 
-#define DELAY_US                 1000                /**< Timer Delay between transmissions (us). */
+#define DELAY_US                 2                /**< Timer Delay between transmissions (us). */
 
 #define TX_RX_BUF_LENGTH         2                 /**< SPI transaction buffer length. */
 
@@ -49,7 +50,7 @@
     #error "No SPI enabled"
 #endif
 
-#define STORED 100 // number of values in the Look Up Table (LUT)
+#define STORED 10 // number of values in the Look Up Table (LUT)
 
 // Data buffers.
 static uint8_t m_tx_data[TX_RX_BUF_LENGTH] = {0}; /**< A buffer with data to transfer. */
@@ -57,41 +58,16 @@ static uint8_t m_rx_data[TX_RX_BUF_LENGTH] = {0}; /**< A buffer for incoming dat
 static uint16_t sineWave[STORED] = {0};
 
 static volatile bool m_transfer_completed = true; /**< A flag to inform about completed transfer. */
+static volatile bool negate = false; // variable indicating inverted wave
 volatile uint8_t counter = 0; // Counting variable
 
 void sineInit(){
     float dr = 3.14/(2*STORED); // increment value for sine storing
 	uint8_t i;
-	for(i = 0, i<STORED, i++) {
-		sineWave[i] = (uint16_t)(sin(i*dr)*4096); // map sine to ADC values
+	for(i = 0; i<STORED; i++) {
+		sineWave[i] = (uint16_t)(sin((float)i*dr)*2048.0+2048.0); // map sine to ADC values
 	}	
 }
-
-/**@brief Function for checking if data coming from a SPI slave are valid.
- *
- * @param[in] p_buf     A pointer to a data buffer.
- * @param[in] len       A length of the data buffer.
- * 
- * @note Expected ASCII characters from: 'a' to: ('a' + len - 1).
- *
- * @retval true     Data are valid.
- * @retval false    Data are invalid.
- */
-static __INLINE bool buf_check(uint8_t * p_buf, uint16_t len)
-{
-    uint16_t i;
-
-    for (i = 0; i < len; i++)
-    {
-        if (p_buf[i] != (uint8_t)('a' + i))
-        {
-            return false;
-        }
-    }
-
-    return true;
-}
-
 
 /** @brief Function for initializing a SPI master driver.
  */
@@ -172,14 +148,14 @@ static void init_buffers(uint8_t * const p_tx_data,
                          uint8_t * const p_rx_data,
                          const uint16_t  len)
 {
-    if(counter >= 30) counter = 0;
-    else counter++; 
+    //if(counter >= 30) counter = 0;
+    //else counter++; 
     uint16_t i;
-    uint16_t data = (float)4096*((float)counter/30); // Value 0-4096
+    uint16_t data = negate ? 2048-(sineWave[len]-2048) : sineWave[len];//(float)4096*((float)counter/30); // Value 0-4096
     uint16_t data2 = (0x3000 | (0x0FFF & data)) >> 8; // Add config bits
     uint8_t datarray[TX_RX_BUF_LENGTH] = {data2, data};
 
-    for (i = 0; i < len; i++)
+    for (i = 0; i < TX_RX_BUF_LENGTH; i++)
     {
 
 	p_tx_data[i] = datarray[i];
@@ -199,7 +175,7 @@ static void spi_send_recv(uint8_t * const p_tx_data,
                           const uint16_t  len)
 {
     // Initalize buffers.
-    init_buffers(p_tx_data, p_rx_data, len);
+    //init_buffers(p_tx_data, p_rx_data, len);
 
     // Start transfer.
     uint32_t err_code = spi_master_send_recv(SPI_MASTER_HW, p_tx_data, len, p_rx_data, len);
@@ -233,8 +209,10 @@ void bsp_configuration()
 /**@brief Function for application main entry. Does not return. */
 int main(void)
 {
+    sineInit();
     // Setup bsp module.
     bsp_configuration();
+    uint16_t i;
 
     uint32_t err_code = spi_master_init();
     APP_ERROR_CHECK(err_code);
@@ -242,15 +220,43 @@ int main(void)
     // Register SPI master event handler.
     spi_master_evt_handler_reg(SPI_MASTER_HW, spi_master_event_handler);
 
-    for (;;)
+    while (true)
     {
-        if (m_transfer_completed)
-        {
-            m_transfer_completed = false;
+	// Start with first 1/4 of sine wave
+	for(i = 0; i < STORED; i++) {
+	    init_buffers(m_tx_data, m_rx_data, i);
+	    spi_send_recv(m_tx_data, m_rx_data, TX_RX_BUF_LENGTH);
+	    while(m_transfer_completed == false); // Wait for transmission
+	    m_transfer_completed = false;
+	};
+	for(i = STORED-1; i >= 1; i--) {
+	    init_buffers(m_tx_data, m_rx_data, i);
+	    spi_send_recv(m_tx_data, m_rx_data, TX_RX_BUF_LENGTH);
+	    while(m_transfer_completed == false); // Wait for transmission
+	    m_transfer_completed = false;
+	};
+	negate = true; // Invert waveform
+	for(i = 0; i < STORED; i++) {
+	    init_buffers(m_tx_data, m_rx_data, i);
+	    spi_send_recv(m_tx_data, m_rx_data, TX_RX_BUF_LENGTH);
+	    while(m_transfer_completed == false); // Wait for transmission
+	    m_transfer_completed = false;
+	};
+	for(i = STORED-1; i >= 1; i--) {
+	    init_buffers(m_tx_data, m_rx_data, i);
+	    spi_send_recv(m_tx_data, m_rx_data, TX_RX_BUF_LENGTH);
+	    while(m_transfer_completed == false); // Wait for transmission
+	    m_transfer_completed = false;
+	};
+	negate = false;
 
-            // Set buffers and start data transfer.
-            spi_send_recv(m_tx_data, m_rx_data, TX_RX_BUF_LENGTH);
-        }
+/*        if (m_transfer_completed)*/
+/*        {*/
+/*            m_transfer_completed = false;*/
+
+/*            // Set buffers and start data transfer.*/
+/*            spi_send_recv(m_tx_data, m_rx_data, TX_RX_BUF_LENGTH);*/
+/*        }*/
     }
 }
 
