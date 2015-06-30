@@ -38,7 +38,7 @@
 #define APP_TIMER_MAX_TIMERS     BSP_APP_TIMERS_NUMBER  /**< Maximum number of simultaneously created timers. */
 #define APP_TIMER_OP_QUEUE_SIZE  2                      /**< Size of timer operation queues. */
 
-#define DELAY_US                 2                /**< Timer Delay between transmissions (us). */
+//#define DELAY_US                 2                /**< Timer Delay between transmissions (us). */
 
 #define TX_RX_BUF_LENGTH         2                 /**< SPI transaction buffer length. */
 
@@ -50,7 +50,8 @@
     #error "No SPI enabled"
 #endif
 
-#define STORED 10 // number of values in the Look Up Table (LUT)
+#define STORED 11 // number of values in the Look Up Table (LUT)
+#define Fs 12500 // Sampling frequency (Hz) (with no other functions running, this averages 80us)
 
 // Data buffers.
 static uint8_t m_tx_data[TX_RX_BUF_LENGTH] = {0}; /**< A buffer with data to transfer. */
@@ -74,7 +75,7 @@ void sineInit(){
 static uint32_t spi_master_init(void)
 {
     spi_master_config_t spi_config ={                                                                           \
-    SPI_FREQUENCY_FREQUENCY_M1, /**< Serial clock frequency 1 Mbps. Found in nrf51_bitfields.h. */      \
+    SPI_FREQUENCY_FREQUENCY_M8, /**< Serial clock frequency 8 Mbps. Found in nrf51_bitfields.h. */      \
     SPI_PIN_DISCONNECTED,       /**< SCK pin DISCONNECTED. */               \
     SPI_PIN_DISCONNECTED,       /**< MISO pin DISCONNECTED. */              \
     SPI_PIN_DISCONNECTED,       /**< MOSI pin DISCONNECTED. */              \
@@ -180,7 +181,7 @@ static void spi_send_recv(uint8_t * const p_tx_data,
     // Start transfer.
     uint32_t err_code = spi_master_send_recv(SPI_MASTER_HW, p_tx_data, len, p_rx_data, len);
     APP_ERROR_CHECK(err_code);
-    nrf_delay_us(DELAY_US);
+    //nrf_delay_us(DELAY_US);
 }
 
 
@@ -250,13 +251,6 @@ int main(void)
 	};
 	negate = false;
 
-/*        if (m_transfer_completed)*/
-/*        {*/
-/*            m_transfer_completed = false;*/
-
-/*            // Set buffers and start data transfer.*/
-/*            spi_send_recv(m_tx_data, m_rx_data, TX_RX_BUF_LENGTH);*/
-/*        }*/
     }
 }
 
