@@ -68,7 +68,7 @@ void sineInit(){
     float dr = 3.14/(2*STORED); // increment value for sine storing
 	uint8_t i;
 	for(i = 0; i<STORED; i++) {
-		sineWave[i] = (uint16_t)(sin((float)i*dr)*2048.0+2048.0); // map sine to ADC values
+		sineWave[i] = (uint16_t)(sin((float)i*dr)*2048.0+2047.0); // map sine to ADC values
 	}	
 }
 
@@ -154,7 +154,7 @@ static void init_buffers(uint8_t * const p_tx_data,
     //if(counter >= 30) counter = 0;
     //else counter++; 
     uint16_t i;
-    uint16_t data = negate ? 2048-(sineWave[len]-2048) : sineWave[len];//(float)4096*((float)counter/30); // Value 0-4096
+    uint16_t data = negate ? 4095-(sineWave[len]) : sineWave[len];//(float)4096*((float)counter/30); // Value 0-4096
     uint16_t data2 = (0x3000 | (0x0FFF & data)) >> 8; // Add config bits
     uint8_t datarray[TX_RX_BUF_LENGTH] = {data2, data};
 
@@ -233,25 +233,13 @@ int main(void)
 
     while (true)
     {
-	// Stored contains the first quadrant of a wave
-/*	for(i = 0; i < (4*STORED-2); i++) { */
-/*	    negate = i > (2*STORED-2) ? true : false; // negate the wave if second half*/
-/*	    descend = i%(STORED-1) == 0 ? !descend : descend; // switch every STORED run*/
-/*	    j = descend ? j-1 : j+1;*/
-/*	    init_buffers(m_tx_data, m_rx_data, j);*/
-/*	    spi_send_recv(m_tx_data, m_rx_data, TX_RX_BUF_LENGTH);*/
-/*	    while(m_transfer_completed == false); // Wait for transmission*/
-/*	    m_transfer_completed = false;*/
-/*	}*/
-	//j=0;
-	for(i = 0; i < 2*STORED; i++) {
+
+	for(i = 0; i < 2*(STORED-1); i++) {
 	    sendData(j);
-	    descend = i > STORED-1 ? true : false;
+	    descend = i > STORED-2 ? true : false;
 	    j = descend ? j-1 : j+1;
 	};
-/*	for(i=i; i > 1; i--) {*/
-/*	    sendData(i-1);*/
-/*	};*/
+
 	negate = !negate; // Invert waveform
 
     }
