@@ -60,6 +60,8 @@ static uint16_t sineWave[STORED] = {0};
 
 static volatile bool m_transfer_completed = true; /**< A flag to inform about completed transfer. */
 static volatile bool negate = false; // variable indicating inverted wave
+static volatile bool descend = false; // variable indicating indexing backwards through STORED
+static volatile uint16_t frequency = 300; // Frequency of the output wave
 volatile uint8_t counter = 0; // Counting variable
 
 void sineInit(){
@@ -206,6 +208,13 @@ void bsp_configuration()
     APP_ERROR_CHECK(err_code);
 }
 
+void sendData(uint16_t index){
+    init_buffers(m_tx_data, m_rx_data, index);
+    spi_send_recv(m_tx_data, m_rx_data, TX_RX_BUF_LENGTH);
+    while(m_transfer_completed == false); // Wait for transmission
+    m_transfer_completed = false;
+}
+
 
 /**@brief Function for application main entry. Does not return. */
 int main(void)
@@ -213,7 +222,8 @@ int main(void)
     sineInit();
     // Setup bsp module.
     bsp_configuration();
-    uint16_t i;
+    uint16_t i = 0;
+    uint16_t j = 0;
 
     uint32_t err_code = spi_master_init();
     APP_ERROR_CHECK(err_code);
@@ -223,33 +233,26 @@ int main(void)
 
     while (true)
     {
-	// Start with first 1/4 of sine wave
-	for(i = 0; i < STORED; i++) {
-	    init_buffers(m_tx_data, m_rx_data, i);
-	    spi_send_recv(m_tx_data, m_rx_data, TX_RX_BUF_LENGTH);
-	    while(m_transfer_completed == false); // Wait for transmission
-	    m_transfer_completed = false;
+	// Stored contains the first quadrant of a wave
+/*	for(i = 0; i < (4*STORED-2); i++) { */
+/*	    negate = i > (2*STORED-2) ? true : false; // negate the wave if second half*/
+/*	    descend = i%(STORED-1) == 0 ? !descend : descend; // switch every STORED run*/
+/*	    j = descend ? j-1 : j+1;*/
+/*	    init_buffers(m_tx_data, m_rx_data, j);*/
+/*	    spi_send_recv(m_tx_data, m_rx_data, TX_RX_BUF_LENGTH);*/
+/*	    while(m_transfer_completed == false); // Wait for transmission*/
+/*	    m_transfer_completed = false;*/
+/*	}*/
+	//j=0;
+	for(i = 0; i < 2*STORED; i++) {
+	    sendData(j);
+	    descend = i > STORED-1 ? true : false;
+	    j = descend ? j-1 : j+1;
 	};
-	for(i = STORED-1; i >= 1; i--) {
-	    init_buffers(m_tx_data, m_rx_data, i);
-	    spi_send_recv(m_tx_data, m_rx_data, TX_RX_BUF_LENGTH);
-	    while(m_transfer_completed == false); // Wait for transmission
-	    m_transfer_completed = false;
-	};
-	negate = true; // Invert waveform
-	for(i = 0; i < STORED; i++) {
-	    init_buffers(m_tx_data, m_rx_data, i);
-	    spi_send_recv(m_tx_data, m_rx_data, TX_RX_BUF_LENGTH);
-	    while(m_transfer_completed == false); // Wait for transmission
-	    m_transfer_completed = false;
-	};
-	for(i = STORED-1; i >= 1; i--) {
-	    init_buffers(m_tx_data, m_rx_data, i);
-	    spi_send_recv(m_tx_data, m_rx_data, TX_RX_BUF_LENGTH);
-	    while(m_transfer_completed == false); // Wait for transmission
-	    m_transfer_completed = false;
-	};
-	negate = false;
+/*	for(i=i; i > 1; i--) {*/
+/*	    sendData(i-1);*/
+/*	};*/
+	negate = !negate; // Invert waveform
 
     }
 }
