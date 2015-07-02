@@ -38,7 +38,7 @@
 #define APP_TIMER_MAX_TIMERS     BSP_APP_TIMERS_NUMBER  /**< Maximum number of simultaneously created timers. */
 #define APP_TIMER_OP_QUEUE_SIZE  2                      /**< Size of timer operation queues. */
 
-//#define DELAY_US                 2                /**< Timer Delay between transmissions (us). */
+//#define DELAY_US                 1500                /**< Timer Delay between transmissions (us). */
 
 #define TX_RX_BUF_LENGTH         2                 /**< SPI transaction buffer length. */
 
@@ -50,7 +50,7 @@
     #error "No SPI enabled"
 #endif
 
-#define STORED 11 // number of values in the Look Up Table (LUT)
+#define STORED 10 // number of values in the Look Up Table (LUT)
 #define Fs 12500 // Sampling frequency (Hz) (with no other functions running, this averages 80us)
 
 // Data buffers.
@@ -58,11 +58,11 @@ static uint8_t m_tx_data[TX_RX_BUF_LENGTH] = {0}; /**< A buffer with data to tra
 static uint8_t m_rx_data[TX_RX_BUF_LENGTH] = {0}; /**< A buffer for incoming data. */
 static uint16_t sineWave[STORED] = {0};
 
-static volatile bool m_transfer_completed = true; /**< A flag to inform about completed transfer. */
+static volatile bool m_transfer_completed = true; /**< A flag informing completed transfer. */
 static volatile bool negate = false; // variable indicating inverted wave
-static volatile bool descend = false; // variable indicating indexing backwards through STORED
-static volatile uint16_t frequency = 300; // Frequency of the output wave
-volatile uint8_t counter = 0; // Counting variable
+static volatile uint16_t frequency = 100; // Frequency of the output wave
+static volatile uint16_t lastFreq = 0;
+static volatile uint16_t delay_us = 170; // delay in microseconds for slowing down a waveform
 
 void sineInit(){
     float dr = 3.14/(2*STORED); // increment value for sine storing
@@ -151,10 +151,9 @@ static void init_buffers(uint8_t * const p_tx_data,
                          uint8_t * const p_rx_data,
                          const uint16_t  len)
 {
-    //if(counter >= 30) counter = 0;
-    //else counter++; 
+ 
     uint16_t i;
-    uint16_t data = negate ? 4095-(sineWave[len]) : sineWave[len];//(float)4096*((float)counter/30); // Value 0-4096
+    uint16_t data = negate ? 4095-(sineWave[len]) : sineWave[len]; // Value 0-4095
     uint16_t data2 = (0x3000 | (0x0FFF & data)) >> 8; // Add config bits
     uint8_t datarray[TX_RX_BUF_LENGTH] = {data2, data};
 
@@ -183,7 +182,7 @@ static void spi_send_recv(uint8_t * const p_tx_data,
     // Start transfer.
     uint32_t err_code = spi_master_send_recv(SPI_MASTER_HW, p_tx_data, len, p_rx_data, len);
     APP_ERROR_CHECK(err_code);
-    //nrf_delay_us(DELAY_US);
+    //nrf_delay_us(delay_us);
 }
 
 
@@ -211,6 +210,13 @@ void bsp_configuration()
 void sendData(uint16_t index){
     init_buffers(m_tx_data, m_rx_data, index);
     spi_send_recv(m_tx_data, m_rx_data, TX_RX_BUF_LENGTH);
+    // Calculate new delay if frequency changed
+    if(lastFreq != frequency){
+	delay_us = (uint16_t)(1000000/(frequency*STORED*4)-80);
+	lastFreq = frequency;
+    }
+    nrf_delay_us(delay_us);
+
     while(m_transfer_completed == false); // Wait for transmission
     m_transfer_completed = false;
 }
@@ -236,11 +242,11 @@ int main(void)
 
 	for(i = 0; i < 2*(STORED-1); i++) {
 	    sendData(j);
-	    descend = i > STORED-2 ? true : false;
-	    j = descend ? j-1 : j+1;
+	    j = i > STORED-2 ? j-1 : j+1;
 	};
 
 	negate = !negate; // Invert waveform
+	//frequency = frequency == 50 ? 100 : 50;
 
     }
 }
