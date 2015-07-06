@@ -2,14 +2,14 @@
 
 NRF51_SDK=~/nRF51_SDK_8.1.0
 
-printf "\nWhich softdevice would you like to use? (M for master, S for Slave)\n"
+printf "\nWhich softdevice would you like to use? (m for master, s for Slave)\n"
 read soft
 
-if [ $soft = M ]
+if [ $soft = m ]
 	then printf "\nUsing s120 (master) softdevice\n"
 	SOFTDEVICE=$NRF51_SDK/components/softdevice/s120/hex/s120_softdevice.hex
 	INPUT=nrf51422_xxac_s120.hex
-elif [ $soft = S ]
+elif [ $soft = s ]
 	then printf "\nUsing s110 (slave) softdevice\n"
 	SOFTDEVICE=$NRF51_SDK/components/softdevice/s110/hex/s110_softdevice.hex
 	INPUT=nrf51422_xxac_s110.hex

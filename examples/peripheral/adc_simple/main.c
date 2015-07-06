@@ -111,7 +111,7 @@ void adc_config(void)
 
     // Initialize and configure ADC
     nrf_adc_configure( (nrf_adc_config_t *)&nrf_adc_config);
-    nrf_adc_input_select(NRF_ADC_CONFIG_INPUT_2);
+    nrf_adc_input_select(NRF_ADC_CONFIG_INPUT_7);
     nrf_adc_int_enable(ADC_INTENSET_END_Enabled << ADC_INTENSET_END_Pos);
     NVIC_SetPriority(ADC_IRQn, NRF_APP_PRIORITY_HIGH);
     NVIC_EnableIRQ(ADC_IRQn);
