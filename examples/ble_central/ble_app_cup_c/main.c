@@ -67,7 +67,7 @@
 #define SLAVE_LATENCY              0                                  /**< Determines slave latency in counts of connection events. */
 #define SUPERVISION_TIMEOUT        MSEC_TO_UNITS(4000, UNIT_10_MS)    /**< Determines supervision time-out in units of 10 millisecond. */
 
-#define TARGET_UUID                0x180F                             /**< Target device name that application is looking for (BATTERY SERVICE). */
+#define TARGET_UUID                0x2AB3                             /**< Target device name that application is looking for (Altitude). */
 #define MAX_PEER_COUNT             DEVICE_MANAGER_MAX_CONNECTIONS     /**< Maximum number of peer's application intends to manage. */
 #define UUID16_SIZE                2                                  /**< Size of 16 bit UUID */
 
@@ -356,7 +356,7 @@ static ret_code_t device_manager_event_handler(const dm_handle_t    * p_handle,
         {
             APPL_LOG("[APPL]: >> DM_EVT_DISCONNECTION\r\n");
             memset(&m_ble_db_discovery, 0 , sizeof (m_ble_db_discovery));
-            printf("Device Disconnected \r\n"); /**********************/
+            //printf("Device Disconnected \r\n"); /**********************/
             err_code = bsp_indication_set(BSP_INDICATE_IDLE);
             APP_ERROR_CHECK(err_code);
 
@@ -556,7 +556,7 @@ static void on_ble_evt(ble_evt_t * p_ble_evt)
             if (p_gap_evt->params.timeout.src == BLE_GAP_TIMEOUT_SRC_SCAN)
             {
                 APPL_LOG("[APPL]: Scan timed out.\r\n");
-		printf("Scan timed out :-(\r\n");
+		//printf("Scan timed out :-(\r\n");
                 scan_start();
             }
             else if (p_gap_evt->params.timeout.src == BLE_GAP_TIMEOUT_SRC_CONN)
@@ -766,9 +766,9 @@ void bsp_event_handler(bsp_event_t event)
     }
 }
 
-void sendData(uint16_t index){
+void sendData(uint16_t accel){
 
-    init_buffers(m_tx_data, m_rx_data, index);
+    init_buffers(m_tx_data, m_rx_data, accel);
     spi_send_recv(m_tx_data, m_rx_data, TX_RX_BUF_LENGTH);
     while(m_transfer_completed == false); // Wait for transmission
     m_transfer_completed = false;
@@ -784,7 +784,7 @@ static void bas_c_evt_handler(ble_bas_c_t * p_bas_c, ble_bas_c_evt_t * p_bas_c_e
     {
         case BLE_BAS_C_EVT_DISCOVERY_COMPLETE:
             // Battery service discovered. Enable notification of Battery Level.
-            printf("Battery service discovered \r\n");
+            //printf("Battery service discovered \r\n");
             APPL_LOG("[APPL]: Battery Service discovered. \r\n");
 
             APPL_LOG("[APPL]: Reading battery level. \r\n");
@@ -807,10 +807,12 @@ static void bas_c_evt_handler(ble_bas_c_t * p_bas_c, ble_bas_c_evt_t * p_bas_c_e
 	    // Normalize the battery level
 	    batteryLevel = batteryLevel*16;
 	    batteryLevel = batteryLevel < 4095 ? batteryLevel : 4095;
+	    sendData(batteryLevel);
+	    
             //printf("batteryLevel = %d %%\r\n", batteryLevel);
 	    //sendData(batteryLevel);
 
-            printf("Acceleration: = %d %%\r\n", batteryLevel);
+            //printf("Acceleration: = %d %%\r\n", batteryLevel);
             break;
         }
 
@@ -1000,23 +1002,21 @@ int main(void)
 
     // Initialize.
     bsp_configuration();
-    //APP_TIMER_INIT(APP_TIMER_PRESCALER, APP_TIMER_MAX_TIMERS, APP_TIMER_OP_QUEUE_SIZE, NULL);
+
     buttons_leds_init(&erase_bonds);
-    uart_init();
-    printf("Cup Demo precursor...\r\n");
+    //uart_init();
+    //printf("Cup Demo precursor...\r\n");
     ble_stack_init();
     device_manager_init(erase_bonds);
     db_discovery_init();
-    //hrs_c_init();
     bas_c_init();
-    //pwm_init();
-    //uint32_t err_code = spi_master_init();
-    //APP_ERROR_CHECK(err_code);
-    //spi_master_evt_handler_reg(SPI_MASTER_HW, spi_master_event_handler);
+    uint32_t err_code = spi_master_init();
+    APP_ERROR_CHECK(err_code);
+    spi_master_evt_handler_reg(SPI_MASTER_HW, spi_master_event_handler);
 
     // Start scanning for peripherals and initiate connection
     // with devices that advertise Heart Rate UUID.
-    printf("Beginning Scan...\r\n");
+    //printf("Beginning Scan...\r\n");
     scan_start();
 
     for (;; )

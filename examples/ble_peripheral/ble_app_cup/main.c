@@ -93,7 +93,7 @@ static app_timer_id_t                    m_battery_timer_id;                    
 
 static dm_application_instance_t         m_app_handle;                              /**< Application identifier allocated by device manager */
 
-static ble_uuid_t m_adv_uuids[] = {{BLE_UUID_BATTERY_SERVICE,            BLE_UUID_TYPE_BLE}}; /**< Universally unique service identifiers. */
+static ble_uuid_t m_adv_uuids[] = {{0x2AB3,            BLE_UUID_TYPE_BLE}}; /**< Universally unique service identifiers. */
 
 
 /**@brief Function for performing battery measurement and updating the Battery Level characteristic
@@ -102,14 +102,14 @@ static ble_uuid_t m_adv_uuids[] = {{BLE_UUID_BATTERY_SERVICE,            BLE_UUI
 static void battery_level_update(void)
 {
     uint32_t err_code;
-    uint8_t  battery_level;
+    //uint8_t  battery_level;
 
     //battery_level = (uint8_t)sensorsim_measure(&m_battery_sim_state, &m_battery_sim_cfg);
     //printf("\n\rBegin conversion: ADC value = %d \r\n", (int)adc_sample);
-    battery_level = (uint16_t)adc_sample;
+    //battery_level = (uint8_t)adc_sample;
     //printf("\n\rConversion complete: batt level = %d \r\n", (int)battery_level);
 
-    err_code = ble_bas_battery_level_update(&m_bas, battery_level);
+    err_code = ble_bas_battery_level_update(&m_bas, (uint8_t)adc_sample);
     if ((err_code != NRF_SUCCESS) &&
         (err_code != NRF_ERROR_INVALID_STATE) &&
         (err_code != BLE_ERROR_NO_TX_BUFFERS) &&
@@ -142,8 +142,8 @@ void ADC_IRQHandler(void)
  * @brief ADC initialization.
  */
 void adc_config(void)
-{
-    const nrf_adc_config_t nrf_adc_config = { NRF_ADC_CONFIG_RES_10BIT, NRF_ADC_CONFIG_SCALING_INPUT_ONE_THIRD, NRF_ADC_CONFIG_REF_SUPPLY_ONE_THIRD };
+{ // Configuration: 8bit resolution, 1/3 scale on input, 1.2V reference
+    const nrf_adc_config_t nrf_adc_config = { NRF_ADC_CONFIG_RES_8BIT, NRF_ADC_CONFIG_SCALING_INPUT_ONE_THIRD, NRF_ADC_CONFIG_REF_VBG };
 
     // Initialize and configure ADC
     nrf_adc_configure( (nrf_adc_config_t *)&nrf_adc_config);

@@ -492,7 +492,7 @@ LOAD /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/
 LOAD /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/libnosys.a
 END GROUP
 
-.text           0x00018000     0x50a0
+.text           0x00018000     0x5098
  *(.Vectors)
  .Vectors       0x00018000       0xc0 _build/gcc_startup_nrf51.o
                 0x00018000                __Vectors
@@ -876,59 +876,58 @@ END GROUP
                 0x0001ce94       0x60 _build/bsp.o
  .rodata.bsp_indication_set
                 0x0001cef4       0x60 _build/bsp.o
- .rodata        0x0001cf54        0x8 _build/main.o
  .rodata.str1.4
-                0x0001cf5c        0x8 _build/main.o
+                0x0001cf54        0x8 _build/main.o
  .rodata.dm_ble_evt_handler
-                0x0001cf64      0x108 _build/device_manager_peripheral.o
+                0x0001cf5c      0x108 _build/device_manager_peripheral.o
  .rodata.m_service_context_store
-                0x0001d06c       0x10 _build/device_manager_peripheral.o
-                0x0001d06c                m_service_context_store
+                0x0001d064       0x10 _build/device_manager_peripheral.o
+                0x0001d064                m_service_context_store
  .rodata.m_service_context_load
-                0x0001d07c       0x10 _build/device_manager_peripheral.o
-                0x0001d07c                m_service_context_load
+                0x0001d074       0x10 _build/device_manager_peripheral.o
+                0x0001d074                m_service_context_load
  .rodata.m_service_context_apply
-                0x0001d08c       0x10 _build/device_manager_peripheral.o
-                0x0001d08c                m_service_context_apply
+                0x0001d084       0x10 _build/device_manager_peripheral.o
+                0x0001d084                m_service_context_apply
  .rodata.m_context_init_len
-                0x0001d09c        0x4 _build/device_manager_peripheral.o
-                0x0001d09c                m_context_init_len
+                0x0001d094        0x4 _build/device_manager_peripheral.o
+                0x0001d094                m_context_init_len
  *(.eh_frame*)
-                0x0001d0a0                . = ALIGN (0x4)
+                0x0001d098                . = ALIGN (0x4)
 
-.glue_7         0x0001d0a0        0x0
+.glue_7         0x0001d098        0x0
  .glue_7        0x00000000        0x0 linker stubs
 
-.glue_7t        0x0001d0a0        0x0
+.glue_7t        0x0001d098        0x0
  .glue_7t       0x00000000        0x0 linker stubs
 
-.vfp11_veneer   0x0001d0a0        0x0
+.vfp11_veneer   0x0001d098        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x0001d0a0        0x0
+.v4_bx          0x0001d098        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x0001d0a0        0x0
+.iplt           0x0001d098        0x0
  .iplt          0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtbegin.o
 
-.ARM.extab      0x0001d0a0        0x0
+.ARM.extab      0x0001d098        0x0
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x0001d0a0                . = ALIGN (0x4)
-                0x0001d0a0                __exidx_start = .
+                0x0001d098                . = ALIGN (0x4)
+                0x0001d098                __exidx_start = .
 
-.ARM.exidx      0x0001d0a0        0x8
+.ARM.exidx      0x0001d098        0x8
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
- .ARM.exidx     0x0001d0a0        0x8 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/crt0.o
- .ARM.exidx     0x0001d0a8        0x0 _build/gcc_startup_nrf51.o
+ .ARM.exidx     0x0001d098        0x8 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv6-m/crt0.o
+ .ARM.exidx     0x0001d0a0        0x0 _build/gcc_startup_nrf51.o
                                   0x8 (size before relaxing)
-                0x0001d0a8                . = ALIGN (0x4)
-                0x0001d0a8                __exidx_end = .
-                0x0001d0a8                __etext = .
+                0x0001d0a0                . = ALIGN (0x4)
+                0x0001d0a0                __exidx_end = .
+                0x0001d0a0                __etext = .
 
-.rel.dyn        0x0001d0a8        0x0
+.rel.dyn        0x0001d0a0        0x0
  .rel.iplt      0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtbegin.o
 
-.data           0x20002000       0x68 load address 0x0001d0a8
+.data           0x20002000       0x68 load address 0x0001d0a0
                 0x20002000                __data_start__ = .
  *(vtable)
  *(.data*)
@@ -958,10 +957,10 @@ END GROUP
                 0x20002068                . = ALIGN (0x4)
                 0x20002068                __data_end__ = .
 
-.igot.plt       0x20002068        0x0 load address 0x0001d110
+.igot.plt       0x20002068        0x0 load address 0x0001d108
  .igot.plt      0x00000000        0x0 /usr/local/gcc-arm-none-eabi-4_8-2014q1/bin/../lib/gcc/arm-none-eabi/4.8.3/armv6-m/crtbegin.o
 
-.bss            0x20002068      0x7dc load address 0x0001d110
+.bss            0x20002068      0x7dc load address 0x0001d108
                 0x20002068                . = ALIGN (0x4)
                 0x20002068                __bss_start__ = .
  *(.bss*)
@@ -1034,12 +1033,12 @@ END GROUP
  .bss.m_app_handle
                 0x20002214        0x1 _build/main.o
  *fill*         0x20002215        0x3 
- .bss.m_bas     0x20002218       0x18 _build/main.o
+ .bss.BLE_EVT_BUFFER.8350
+                0x20002218       0x48 _build/main.o
+ .bss.m_bas     0x20002260       0x18 _build/main.o
  .bss.m_battery_timer_id
-                0x20002230        0x4 _build/main.o
- .bss.BLE_EVT_BUFFER.8351
-                0x20002234       0x48 _build/main.o
- .bss.APP_TIMER_BUF.8278
+                0x20002278        0x4 _build/main.o
+ .bss.APP_TIMER_BUF.8277
                 0x2000227c      0x308 _build/main.o
  .bss.adc_sample
                 0x20002584        0x4 _build/main.o
