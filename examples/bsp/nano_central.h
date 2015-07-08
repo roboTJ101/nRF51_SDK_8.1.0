@@ -50,4 +50,20 @@
 #define RTS_PIN_NUMBER 8
 #define HWFC           true
 
+// SPI pins
+#define SPIS_MISO_PIN  11    // SPI MISO signal. 
+#define SPIS_CSN_PIN   10    // SPI CSN signal. 
+#define SPIS_MOSI_PIN  9    // SPI MOSI signal. 
+#define SPIS_SCK_PIN   8    // SPI SCK signal. 
+
+#define SPIM0_SCK_PIN       8     /**< SPI clock GPIO pin number. */
+#define SPIM0_MOSI_PIN      9     /**< SPI Master Out Slave In GPIO pin number. */
+#define SPIM0_MISO_PIN      11     /**< SPI Master In Slave Out GPIO pin number. */
+#define SPIM0_SS_PIN        10     /**< SPI Slave Select GPIO pin number. */
+
+#define SPIM1_SCK_PIN       8     /**< SPI clock GPIO pin number. */
+#define SPIM1_MOSI_PIN      9     /**< SPI Master Out Slave In GPIO pin number. */
+#define SPIM1_MISO_PIN      11     /**< SPI Master In Slave Out GPIO pin number. */
+#define SPIM1_SS_PIN        10     /**< SPI Slave Select GPIO pin number. */
+
 #endif /* REDBEAR_NANO_C_H__ */

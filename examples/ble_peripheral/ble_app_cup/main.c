@@ -71,7 +71,7 @@ volatile int32_t adc_sample = 0;
 //More notes on Meas_inerval: the lower this is, the slower the transmission is but you might miss something. 5 = laggy, 200 = only 10 measurements per second. Optimize!
 
 #define MIN_CONN_INTERVAL                MSEC_TO_UNITS(8, UNIT_1_25_MS)           /**< Minimum acceptable connection interval (0.04 seconds). */
-#define MAX_CONN_INTERVAL                MSEC_TO_UNITS(20, UNIT_1_25_MS)           /**< Maximum acceptable connection interval (0.65 second). */
+#define MAX_CONN_INTERVAL                MSEC_TO_UNITS(100, UNIT_1_25_MS)           /**< Maximum acceptable connection interval (0.65 second). */
 #define SLAVE_LATENCY                    0                                          /**< Slave latency. */
 #define CONN_SUP_TIMEOUT                 MSEC_TO_UNITS(4000, UNIT_10_MS)            /**< Connection supervisory timeout (4 seconds). */
 
@@ -106,7 +106,7 @@ static void battery_level_update(void)
 
     //battery_level = (uint8_t)sensorsim_measure(&m_battery_sim_state, &m_battery_sim_cfg);
     //printf("\n\rBegin conversion: ADC value = %d \r\n", (int)adc_sample);
-    battery_level = (uint8_t)((float)adc_sample/9.04);
+    battery_level = (uint16_t)adc_sample;
     //printf("\n\rConversion complete: batt level = %d \r\n", (int)battery_level);
 
     err_code = ble_bas_battery_level_update(&m_bas, battery_level);
@@ -143,7 +143,7 @@ void ADC_IRQHandler(void)
  */
 void adc_config(void)
 {
-    const nrf_adc_config_t nrf_adc_config = NRF_ADC_CONFIG_DEFAULT;
+    const nrf_adc_config_t nrf_adc_config = { NRF_ADC_CONFIG_RES_10BIT, NRF_ADC_CONFIG_SCALING_INPUT_ONE_THIRD, NRF_ADC_CONFIG_REF_SUPPLY_ONE_THIRD };
 
     // Initialize and configure ADC
     nrf_adc_configure( (nrf_adc_config_t *)&nrf_adc_config);

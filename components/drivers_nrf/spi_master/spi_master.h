@@ -25,6 +25,9 @@
 #ifndef APP_SPI_MASTER_H
 #define APP_SPI_MASTER_H
 
+//#ifdef SPI_MASTER_0_ENABLE 
+//    #error MASTER 0 enabled before spi_master.h!
+
 #include <stdint.h>
 #include <stdlib.h>
 

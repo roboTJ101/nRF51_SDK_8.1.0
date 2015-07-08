@@ -19,6 +19,7 @@
 #include "nrf_drv_gpiote.h"
 #include "nrf_assert.h"
 
+
 static app_button_cfg_t *             mp_buttons = NULL;           /**< Button configuration. */
 static uint8_t                        m_button_count;              /**< Number of configured buttons. */
 static uint32_t                       m_detection_delay;           /**< Delay before a button is reported as pushed. */

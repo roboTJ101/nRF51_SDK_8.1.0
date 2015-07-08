@@ -43,6 +43,7 @@
 #define TX_RX_BUF_LENGTH         2                 /**< SPI transaction buffer length. */
 
 #if defined(SPI_MASTER_0_ENABLE)
+    //#error SPI MASTER 0 is defined!
     #define SPI_MASTER_HW SPI_MASTER_0
 #elif defined(SPI_MASTER_1_ENABLE)
     #define SPI_MASTER_HW SPI_MASTER_1
