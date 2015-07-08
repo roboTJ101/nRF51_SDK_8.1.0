@@ -630,7 +630,7 @@ END GROUP
                 0x0001a164        0x4 _build/main.o
  .text.conn_params_error_handler
                 0x0001a168        0xc _build/main.o
- .text.battery_level_meas_timeout_handler
+ .text.accel_meas_timeout_handler
                 0x0001a174       0x54 _build/main.o
  .text.sys_evt_dispatch
                 0x0001a1c8       0x10 _build/main.o
@@ -1030,19 +1030,20 @@ END GROUP
                 0x2000220c        0x4 _build/bsp_btn_ble.o
  .bss.m_num_connections
                 0x20002210        0x4 _build/bsp_btn_ble.o
+ .bss.APP_TIMER_BUF.8191
+                0x20002214      0x308 _build/main.o
  .bss.m_app_handle
-                0x20002214        0x1 _build/main.o
- *fill*         0x20002215        0x3 
- .bss.BLE_EVT_BUFFER.8350
-                0x20002218       0x48 _build/main.o
- .bss.m_bas     0x20002260       0x18 _build/main.o
- .bss.m_battery_timer_id
-                0x20002278        0x4 _build/main.o
- .bss.APP_TIMER_BUF.8277
-                0x2000227c      0x308 _build/main.o
+                0x2000251c        0x1 _build/main.o
+ *fill*         0x2000251d        0x3 
+ .bss.m_accel_timer_id
+                0x20002520        0x4 _build/main.o
+ .bss.m_bas     0x20002524       0x18 _build/main.o
+ .bss.BLE_EVT_BUFFER.8264
+                0x2000253c       0x48 _build/main.o
  .bss.adc_sample
-                0x20002584        0x4 _build/main.o
+                0x20002584        0x1 _build/main.o
                 0x20002584                adc_sample
+ *fill*         0x20002585        0x3 
  .bss.m_advdata
                 0x20002588       0x30 _build/ble_advertising.o
  .bss.m_manuf_specific_data

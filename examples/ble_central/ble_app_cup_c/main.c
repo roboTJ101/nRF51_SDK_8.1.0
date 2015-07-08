@@ -24,19 +24,18 @@
 #include "softdevice_handler.h"
 #include "app_util.h"
 #include "app_error.h"
-#include "app_util_platform.h" //
-#include "nrf_delay.h" //
+#include "app_util_platform.h" 
+#include "nrf_delay.h" 
 #include "boards.h"
 #include "nrf_gpio.h"
 #include "pstorage.h"
 #include "device_manager.h"
 #include "app_trace.h"
-#include "ble_hrs_c.h"
 #include "ble_bas_c.h"
 #include "app_util.h"
 #include "app_timer.h"
 #include "bsp.h"
-#include "spi_master.h" //
+#include "spi_master.h" 
 #include "bsp_btn_ble.h"
 
 #define UART_TX_BUF_SIZE           256                                /**< UART TX buffer size. */
@@ -126,7 +125,6 @@ typedef enum
 } ble_scan_mode_t;
 
 static ble_db_discovery_t           m_ble_db_discovery;                  /**< Structure used to identify the DB Discovery module. */
-static ble_hrs_c_t                  m_ble_hrs_c;                         /**< Structure used to identify the heart rate client module. */
 static ble_bas_c_t                  m_ble_bas_c;                         /**< Structure used to identify the Battery Service client module. */
 static ble_gap_scan_params_t        m_scan_param;                        /**< Scan parameters requested for scanning and connection. */
 static dm_application_instance_t    m_dm_app_id;                         /**< Application identifier. */
@@ -137,13 +135,7 @@ static uint16_t                     m_conn_handle;                       /**< Cu
 static volatile bool                m_whitelist_temporarily_disabled = false; /**< True if whitelist has been temporarily disabled. */
 
 static bool                         m_memory_access_in_progress = false; /**< Flag to keep track of ongoing operations on persistent memory. */
-static volatile uint16_t batteryLevel = 0;
-
-//static volatile bool ready_flag; // A flag indicating PWM status
-
-/*void pwm_ready_callback(uint32_t pwm_id) {*/
-/*    ready_flag = true;*/
-/*};*/
+static volatile uint16_t accel = 0;
 
 /** @brief Function for initializing a SPI master driver.
  */
@@ -383,9 +375,6 @@ static ret_code_t device_manager_event_handler(const dm_handle_t    * p_handle,
         case DM_EVT_SECURITY_SETUP_COMPLETE:
         {
             APPL_LOG("[APPL]: >> DM_EVT_SECURITY_SETUP_COMPLETE\r\n");
-            // Heart rate service discovered. Enable notification of Heart Rate Measurement.
-            err_code = ble_hrs_c_hrm_notif_enable(&m_ble_hrs_c);
-            APP_ERROR_CHECK(err_code);
             APPL_LOG("[APPL]: << DM_EVT_SECURITY_SETUP_COMPLETE\r\n");
             break;
         }
@@ -615,7 +604,6 @@ static void ble_evt_dispatch(ble_evt_t * p_ble_evt)
 {
     dm_ble_evt_handler(p_ble_evt);
     ble_db_discovery_on_ble_evt(&m_ble_db_discovery, p_ble_evt);
-    ble_hrs_c_on_ble_evt(&m_ble_hrs_c, p_ble_evt);
     ble_bas_c_on_ble_evt(&m_ble_bas_c, p_ble_evt);
     bsp_btn_ble_on_ble_evt(p_ble_evt);
     on_ble_evt(p_ble_evt);
@@ -785,14 +773,14 @@ static void bas_c_evt_handler(ble_bas_c_t * p_bas_c, ble_bas_c_evt_t * p_bas_c_e
         case BLE_BAS_C_EVT_DISCOVERY_COMPLETE:
             // Battery service discovered. Enable notification of Battery Level.
             //printf("Battery service discovered \r\n");
-            APPL_LOG("[APPL]: Battery Service discovered. \r\n");
+            APPL_LOG("[APPL]: Altitude Service discovered. \r\n");
 
-            APPL_LOG("[APPL]: Reading battery level. \r\n");
+            APPL_LOG("[APPL]: Reading Accelerometer. \r\n");
 
             err_code = ble_bas_c_bl_read(p_bas_c);
             APP_ERROR_CHECK(err_code);
 
-            APPL_LOG("[APPL]: Enabling Battery Level Notification. \r\n");
+            APPL_LOG("[APPL]: Enabling Acceleration Notification. \r\n");
             err_code = ble_bas_c_bl_notif_enable(p_bas_c);
             APP_ERROR_CHECK(err_code);
 
@@ -801,13 +789,13 @@ static void bas_c_evt_handler(ble_bas_c_t * p_bas_c, ble_bas_c_evt_t * p_bas_c_e
 
         case BLE_BAS_C_EVT_BATT_NOTIFICATION:
         {
-            APPL_LOG("[APPL]: Battery Level received %d %%\r\n", p_bas_c_evt->params.battery_level);
+            APPL_LOG("[APPL]: Acceleration received %d %%\r\n", p_bas_c_evt->params.battery_level);
 	    
-	    batteryLevel = p_bas_c_evt->params.battery_level;
+	    accel = p_bas_c_evt->params.battery_level;
 	    // Normalize the battery level
-	    batteryLevel = batteryLevel*16;
-	    batteryLevel = batteryLevel < 4095 ? batteryLevel : 4095;
-	    sendData(batteryLevel);
+	    accel *= 16;
+	    accel = accel < 4095 ? accel : 4095;
+	    sendData(accel);
 	    
             //printf("batteryLevel = %d %%\r\n", batteryLevel);
 	    //sendData(batteryLevel);
@@ -818,7 +806,7 @@ static void bas_c_evt_handler(ble_bas_c_t * p_bas_c, ble_bas_c_evt_t * p_bas_c_e
 
         case BLE_BAS_C_EVT_BATT_READ_RESP:
         {
-            APPL_LOG("[APPL]: Battery Level Read as %d %%\r\n", p_bas_c_evt->params.battery_level);
+            APPL_LOG("[APPL]: Acceleration Read as %d %%\r\n", p_bas_c_evt->params.battery_level);
 
             //printf("Battery Read As = %d %%\r\n", p_bas_c_evt->params.battery_level);
             break;
@@ -1005,7 +993,7 @@ int main(void)
 
     buttons_leds_init(&erase_bonds);
     //uart_init();
-    //printf("Cup Demo precursor...\r\n");
+    //printf("Cup Demo...\r\n");
     ble_stack_init();
     device_manager_init(erase_bonds);
     db_discovery_init();

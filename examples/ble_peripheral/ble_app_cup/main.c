@@ -9,12 +9,12 @@
  * the file.
  *
  */
-/** @example examples/ble_peripheral/ble_app_hrs/main.c
+/** @example examples/ble_peripheral/ble_app_cup/main.c
  *
- * @brief Heart Rate Service Sample Application main file.
+ * @brief Haptic Cup Demo program for slave side (side with Accelerometer).
  *
- * This file contains the source code for a sample application using the Heart Rate service
- * (and also Battery and Device Information services). This application uses the
+ * This file contains the source code for an application using the Altitude service
+ * to send analog measurements from an accelerometer. This application uses the
  * @ref srvlib_conn_params module.
  */
 
@@ -23,7 +23,7 @@
 //#include <math.h>
 #include "nordic_common.h"
 #include "nrf.h"
-#include "nrf_adc.h" // ADC plz
+#include "nrf_adc.h" 
 #include "app_error.h"
 #include "nrf51_bitfields.h"
 #include "ble.h"
@@ -32,12 +32,9 @@
 #include "ble_advdata.h"
 #include "ble_advertising.h"
 #include "ble_bas.h"
-//#include "ble_hrs.h"
-//#include "ble_dis.h"
 #include "ble_conn_params.h"
 #include "boards.h"
-#include "app_uart.h" // UART plz
-#include "sensorsim.h"
+//#include "app_uart.h" 
 #include "softdevice_handler.h"
 #include "app_timer.h"
 #include "device_manager.h"
@@ -47,10 +44,10 @@
 #include "nrf_delay.h"
 #include "bsp_btn_ble.h"
 
-volatile int32_t adc_sample = 0;
+volatile uint8_t adc_sample = 0;
 
-#define UART_TX_BUF_SIZE 256 /**< UART TX buffer size. */
-#define UART_RX_BUF_SIZE 1   /**< UART RX buffer size. */
+//#define UART_TX_BUF_SIZE 256 /**< UART TX buffer size. */
+//#define UART_RX_BUF_SIZE 1   /**< UART RX buffer size. */
 
 #ifndef NRF_APP_PRIORITY_HIGH
 #define NRF_APP_PRIORITY_HIGH 1
@@ -67,11 +64,11 @@ volatile int32_t adc_sample = 0;
 #define APP_TIMER_MAX_TIMERS             (6+BSP_APP_TIMERS_NUMBER)                  /**< Maximum number of simultaneously created timers. */
 #define APP_TIMER_OP_QUEUE_SIZE          4                                          /**< Size of timer operation queues. */
 
-#define BATTERY_LEVEL_MEAS_INTERVAL      APP_TIMER_TICKS(15, APP_TIMER_PRESCALER) /**< Battery level measurement interval (ticks, 2000 = 1Hz). */
+#define ACCEL_LEVEL_MEAS_INTERVAL      APP_TIMER_TICKS(5, APP_TIMER_PRESCALER) /**< Accelerometer level measurement interval (ticks, 2000 = 1Hz). */
 //More notes on Meas_inerval: the lower this is, the slower the transmission is but you might miss something. 5 = laggy, 200 = only 10 measurements per second. Optimize!
 
 #define MIN_CONN_INTERVAL                MSEC_TO_UNITS(8, UNIT_1_25_MS)           /**< Minimum acceptable connection interval (0.04 seconds). */
-#define MAX_CONN_INTERVAL                MSEC_TO_UNITS(100, UNIT_1_25_MS)           /**< Maximum acceptable connection interval (0.65 second). */
+#define MAX_CONN_INTERVAL                MSEC_TO_UNITS(20, UNIT_1_25_MS)           /**< Maximum acceptable connection interval (0.65 second). */
 #define SLAVE_LATENCY                    0                                          /**< Slave latency. */
 #define CONN_SUP_TIMEOUT                 MSEC_TO_UNITS(4000, UNIT_10_MS)            /**< Connection supervisory timeout (4 seconds). */
 
@@ -87,19 +84,19 @@ volatile int32_t adc_sample = 0;
 #define SEC_PARAM_MAX_KEY_SIZE           16                                         /**< Maximum encryption key size. */
 
 static uint16_t                          m_conn_handle = BLE_CONN_HANDLE_INVALID;   /**< Handle of the current connection. */
-static ble_bas_t                         m_bas;                                     /**< Structure used to identify the battery service. */
+static ble_bas_t                         m_bas;                                     /**< Structure used to identify the accelerometer service. */
 
-static app_timer_id_t                    m_battery_timer_id;                        /**< Battery timer. */
+static app_timer_id_t                    m_accel_timer_id;                        /**< Battery timer. */
 
 static dm_application_instance_t         m_app_handle;                              /**< Application identifier allocated by device manager */
 
 static ble_uuid_t m_adv_uuids[] = {{0x2AB3,            BLE_UUID_TYPE_BLE}}; /**< Universally unique service identifiers. */
 
 
-/**@brief Function for performing battery measurement and updating the Battery Level characteristic
- *        in Battery Service.
+/**@brief Function for performing battery measurement and updating the 
+ * Battery Level characteristic in Battery Service.
  */
-static void battery_level_update(void)
+static void accel_update(void)
 {
     uint32_t err_code;
     //uint8_t  battery_level;
@@ -109,7 +106,7 @@ static void battery_level_update(void)
     //battery_level = (uint8_t)adc_sample;
     //printf("\n\rConversion complete: batt level = %d \r\n", (int)battery_level);
 
-    err_code = ble_bas_battery_level_update(&m_bas, (uint8_t)adc_sample);
+    err_code = ble_bas_battery_level_update(&m_bas, adc_sample);
     if ((err_code != NRF_SUCCESS) &&
         (err_code != NRF_ERROR_INVALID_STATE) &&
         (err_code != BLE_ERROR_NO_TX_BUFFERS) &&
@@ -130,7 +127,6 @@ void ADC_IRQHandler(void)
     nrf_adc_conversion_event_clean();
 
     adc_sample = nrf_adc_result_get();
-    //battery_level_update();
 
    // nrf_adc_int_enable(ADC_INTENSET_END_Enabled << ADC_INTENSET_END_Pos);
     // trigger next ADC conversion
@@ -161,11 +157,11 @@ void adc_config(void)
  * @param[in] p_context  Pointer used for passing some arbitrary information (context) from the
  *                       app_start_timer() call to the timeout handler.
  */
-static void battery_level_meas_timeout_handler(void * p_context)
+static void accel_meas_timeout_handler(void * p_context)
 {
     UNUSED_PARAMETER(p_context);
     nrf_adc_int_disable(ADC_INTENSET_END_Enabled << ADC_INTENSET_END_Pos);
-    battery_level_update();
+    accel_update();
     nrf_adc_int_enable(ADC_INTENSET_END_Enabled << ADC_INTENSET_END_Pos);
 }
 
@@ -181,9 +177,9 @@ static void timers_init(void)
     APP_TIMER_INIT(APP_TIMER_PRESCALER, APP_TIMER_MAX_TIMERS, APP_TIMER_OP_QUEUE_SIZE, false);
 
     // Create timers.
-    err_code = app_timer_create(&m_battery_timer_id,
+    err_code = app_timer_create(&m_accel_timer_id,
                                 APP_TIMER_MODE_REPEATED,
-                                battery_level_meas_timeout_handler);
+                                accel_meas_timeout_handler);
     APP_ERROR_CHECK(err_code);
 }
 
@@ -256,7 +252,7 @@ static void application_timers_start(void)
     uint32_t err_code;
 
     // Start application timers.
-    err_code = app_timer_start(m_battery_timer_id, BATTERY_LEVEL_MEAS_INTERVAL, NULL);
+    err_code = app_timer_start(m_accel_timer_id, ACCEL_LEVEL_MEAS_INTERVAL, NULL);
     APP_ERROR_CHECK(err_code);
 
 }
