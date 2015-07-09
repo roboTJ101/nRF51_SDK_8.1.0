@@ -49,7 +49,7 @@
 #define SPIM0_SCK_PIN       8     /**< SPI clock GPIO pin number. */
 #define SPIM0_MOSI_PIN      9     /**< SPI Master Out Slave In GPIO pin number. */
 #define SPIM0_MISO_PIN      11     /**< SPI Master In Slave Out GPIO pin number. */
-#define SPIM0_SS_PIN        10     /**< SPI Slave Select GPIO pin number. */
+#define SPIM0_SS_PIN        7     /**< SPI Slave Select GPIO pin number. */
 
 #define SPIM1_SCK_PIN       8     /**< SPI clock GPIO pin number. */
 #define SPIM1_MOSI_PIN      9     /**< SPI Master Out Slave In GPIO pin number. */
