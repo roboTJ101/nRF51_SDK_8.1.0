@@ -1,0 +1,5 @@
+Documentation can be found offline at: <keil_location>/ARM/Pack/NordicSemiconductor/nRF_Examples/8.1.0/documentation
+
+THIS VERSION OF SPI DRIVER IS USED WITH AN MCP4822 DUAL CHANNEL DAC CHIP!
+
+Documentation can be found online at: http://developer.nordicsemi.com/nRF51_SDK/doc/
